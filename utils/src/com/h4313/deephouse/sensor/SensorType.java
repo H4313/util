@@ -2,14 +2,14 @@ package com.h4313.deephouse.sensor;
 
 public enum SensorType {
 
-	TEMPERATURE(true,""), 
+	TEMPERATURE(true,"00000000"), 
 	SWITCH(true,"A55A0B05"),
-	LIGHT(true,""), 
-	PRESENCE(true,""), 
-	HUMIDITY(false,""), 
-	NOISE(false,""), 
-	SMOKE(false,""), 
-	SMELL(false,"");
+	LIGHT(true,"00000000"), 
+	PRESENCE(true,"00000000"), 
+	HUMIDITY(false,"00000000"), 
+	NOISE(false,"00000000"), 
+	SMOKE(false,"00000000"), 
+	SMELL(false,"00000000");
 
 	/*
 	 * true if the sensor is a physical one false if it's a virtual one
