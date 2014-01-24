@@ -2,7 +2,7 @@ package com.h4313.deephouse.sensor;
 
 public enum SensorType {
 
-	TEMPERATURE(true,"00000000"), 
+	TEMPERATURE(true,"A55A1005"), 
 	SWITCH(true,"A55A0B05"),
 	LIGHT(true,"00000000"), 
 	PRESENCE(true,"00000000"), 
