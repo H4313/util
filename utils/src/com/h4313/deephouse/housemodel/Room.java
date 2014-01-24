@@ -1,4 +1,4 @@
-package com.h4313.deephouse.houseModel;
+package com.h4313.deephouse.housemodel;
 
 import com.h4313.deephouse.server.sensor.SensorSet;
 import com.h4313.deephouse.server.sensor.ActuatorSet;

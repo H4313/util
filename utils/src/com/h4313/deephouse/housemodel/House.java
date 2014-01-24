@@ -1,4 +1,4 @@
-package com.h4313.deephouse.houseModel;
+package com.h4313.deephouse.housemodel;
 
 import java.util.ArrayList;
 
