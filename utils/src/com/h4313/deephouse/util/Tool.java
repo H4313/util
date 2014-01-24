@@ -20,7 +20,7 @@ public abstract class Tool
 	
 	public static boolean isValidPort(final String port)
 	{
-		final String PATTERN = "^([0-9]*)$";
+		final String PATTERN = "(?<=\\s|^)|\\d+(?=\\s|$)";
 
 		Pattern pattern = Pattern.compile(PATTERN);
 		Matcher matcher = pattern.matcher(port);
