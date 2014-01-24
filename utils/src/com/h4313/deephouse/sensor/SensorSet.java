@@ -11,6 +11,11 @@ import com.h4313.deephouse.sensor.SensorType;
 //Hashtable is synchronized
 public class SensorSet extends Hashtable<String, Sensor> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8523495607779653300L;
+
 	public SensorSet() {
 		super();
 	}

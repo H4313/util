@@ -9,9 +9,9 @@ public abstract class RoomFactory {
 	public static Room createInstance(RoomType type) throws DeepHouseException {
 		switch (type) {
 		case ID_CHAMBRE1:
-			return new Chamber(type.getId());
+			return new Bedroom(type.getId());
 		case ID_CHAMBRE2:
-			return new Chamber(type.getId());
+			return new Bedroom(type.getId());
 		case ID_COULOIR:
 			return null; //TODO
 		case ID_CUISINE:
