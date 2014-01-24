@@ -3,12 +3,9 @@ package com.h4313.deephouse.sensor;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
+import com.h4313.deephouse.util.Constant;
 
 public class BooleanSensor extends Sensor {
-	
-	private static final String booleanSensorDatasTrue = "10000000";
-	
-	private static final String booleanSensorDatasFalse = "00000000";
 
 	public BooleanSensor(String id, SensorType type) {
 		this.id = id;
@@ -20,10 +17,10 @@ public class BooleanSensor extends Sensor {
 	public String getDatas() {
 		String datas = "";
 		if(lastValue) {
-			datas += booleanSensorDatasTrue;
+			datas += Constant.SENSOR_BOOLEAN_DATAS_TRUE;
 		}
 		else {
-			datas += booleanSensorDatasFalse;
+			datas += Constant.SENSOR_BOOLEAN_DATAS_FALSE;
 		}
 		return datas;
 	}
@@ -31,7 +28,7 @@ public class BooleanSensor extends Sensor {
 	@Override
 	public void update(Frame frame) throws DeepHouseException {
 		// TODO Auto-generated method stub
-		if(frame.getDataStr().equals(booleanSensorDatasTrue)) {
+		if(frame.getDataStr().equals(Constant.SENSOR_BOOLEAN_DATAS_TRUE)) {
 			lastValue = true;
 		}
 		else {
