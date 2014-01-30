@@ -21,7 +21,7 @@ public class TcpSendExample implements CallBack
 		try {
 			tcpSender = new TcpSender(ip, port, this);
 			tcpSender.start();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

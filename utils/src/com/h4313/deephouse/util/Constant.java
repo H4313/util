@@ -24,6 +24,9 @@ public abstract class Constant
 	 */
 	public static final int TCP_FRAME_LENGTH = 28;
 	
+	public static final int TCP_CONNECTION_TIMEOUT = 1000; // 1 second
+	
+	
     /**
      * DeepHouseCalendar
      */

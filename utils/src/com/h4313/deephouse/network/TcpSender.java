@@ -2,7 +2,9 @@ package com.h4313.deephouse.network;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 import com.h4313.deephouse.network.CallBack;
 import com.h4313.deephouse.util.Constant;
@@ -18,14 +20,30 @@ public class TcpSender extends Thread
     private int senderId;
     private CallBack applicant;
 	
-	public TcpSender(String ip, int port, CallBack applicant) throws IOException
+	public TcpSender(String host, int port, CallBack applicant) throws IOException, InterruptedException
 	{	
 		this.alive = true;
 		this.senderId = TcpSender.lastReceiverId++;
+		boolean isConnected = false;
 		
 		try 
-		{
-			this.socket = new Socket(ip, port);
+		{			
+			do
+			{
+				try
+				{
+					this.socket = new Socket(host, port);
+					this.socket.setSoTimeout(Constant.TCP_CONNECTION_TIMEOUT);
+					isConnected = true;
+					System.out.println("Connecte !");
+				}
+				catch(Exception e)
+				{
+					System.out.println("La connexion a echoue : " + e.getMessage());
+					isConnected = false;
+					Thread.sleep(Constant.TCP_CONNECTION_TIMEOUT);
+				}
+			} while(!isConnected || this.socket == null || !this.socket.isConnected());
 			
 //			this.receiverAddress = ip;
 //			this.receiverPort = port;
@@ -33,11 +51,13 @@ public class TcpSender extends Thread
 			this.out = this.socket.getOutputStream();
 			
 			this.applicant = applicant;
+			
+			System.out.println("Sender connecte !");
 		} 
 		catch (IOException e) 
 		{
-//			e.printStackTrace();
-			throw new IOException("Erreur a la connexion avec le client");
+			e.printStackTrace();
+//			throw new IOException("Erreur a la connexion avec le client");
 		}		
 	}
 	
@@ -50,14 +70,13 @@ public class TcpSender extends Thread
 			while(alive)
 			{
 				s = applicant.callBack(null);
-				System.out.println("Retour du callback = " + s);
 				
 				if(s != null)
 				{
 					send(s);
 				}
 				
-				 Thread.sleep(10000); // Wait X milliseconds
+				 Thread.sleep(1000); // Wait X milliseconds
 			}
 		}
 		catch(Exception e)
