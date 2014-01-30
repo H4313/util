@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
+import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
 
 public class House {
@@ -55,5 +56,15 @@ public class House {
 		Room newRoom = RoomFactory.createInstance(type);
 		this.rooms.add(newRoom);
 		return newRoom;
+	}
+	
+	
+	public void updateSensor(Frame frame) throws DeepHouseException {
+		for(Room r : rooms) {
+			if(r.sensors.containsValue(frame.getId())) {
+				r.sensors.updateSensor(frame);
+				return;
+			}
+		}
 	}
 }

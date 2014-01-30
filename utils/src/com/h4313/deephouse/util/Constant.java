@@ -17,6 +17,8 @@ public abstract class Constant
 	
 	public static final int SENSOR_TEMPERATURE_BYTES = 2;
 	
+	public static final int FRAME_DATA_LENGTH_BYTES = 4;
+	
 	/**
 	 * TCP
 	 */
