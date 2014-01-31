@@ -9,7 +9,7 @@ import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
 
 //Hashtable is synchronized
-public class SensorSet extends Hashtable<String, Sensor> {
+public class SensorSet extends Hashtable<String, Sensor<Object>> {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class SensorSet extends Hashtable<String, Sensor> {
 	}
 
 	public void updateSensor(Frame frame) throws DeepHouseException {
-		Sensor sensor = this.get(frame.getId());
+		Sensor<Object> sensor = this.get(frame.getId());
 		if (sensor == null) {
 			throw new DeepHouseNotFoundException("Id " + frame.getId()
 					+ "not found");
