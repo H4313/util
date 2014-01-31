@@ -1,19 +1,41 @@
 package com.h4313.deephouse.sensor;
 
+import java.io.Serializable;
+
+import javax.persistence.Transient;
+
+import javax.persistence.*;
+
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 
-public class BooleanSensor extends Sensor {
 
+@Entity
+public class BooleanSensor extends Sensor implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+	protected boolean lastValue;
+	
+	public BooleanSensor(){
+		
+	}
+	
 	public BooleanSensor(String id, SensorType type) {
 		this.id = id;
 		this.type = type;
+		this.lastValue=false;
 	}
 	
-	protected boolean lastValue;
-
+	
+	
+	@Transient
 	public String getDatas() {
 		String datas = "";
 		if(lastValue) {
@@ -39,4 +61,10 @@ public class BooleanSensor extends Sensor {
 	public boolean getLastValue() {
 		return lastValue;
 	}
+
+	public void setLastValue(boolean lastValue) {
+		this.lastValue = lastValue;
+	}
+	
+	
 }
