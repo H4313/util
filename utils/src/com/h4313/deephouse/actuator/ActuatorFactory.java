@@ -10,11 +10,11 @@ public class ActuatorFactory {
 		switch (type) {
 		case RADIATOR:
 
-			return new Radiator(id);
+			return new Radiator(id,type);
 
 		case CLIMA:
 			// a voir
-			return new Radiator(id);
+			return new Radiator(id,type);
 		}
 		throw new DeepHouseFormatException("Unknown Actuator type");
 	}

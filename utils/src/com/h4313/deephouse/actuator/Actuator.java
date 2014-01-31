@@ -1,5 +1,7 @@
 package com.h4313.deephouse.actuator;
 
+import com.h4313.deephouse.exceptions.DeepHouseException;
+import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorSet;
 import com.h4313.deephouse.util.Constant;
 
@@ -9,7 +11,7 @@ public abstract class Actuator {
 	// todo : maybe a list (synchronized)
 	protected SensorSet sensors;
 
-	public Actuator(String id) {
+	public Actuator(String id, ActuatorType type) {
 		this.id = id;
 		sensors = new SensorSet();
 	}
@@ -25,4 +27,6 @@ public abstract class Actuator {
 	}
 
 	public abstract String getDatas();
+	
+	public abstract void update(Frame frame) throws DeepHouseException;
 }
