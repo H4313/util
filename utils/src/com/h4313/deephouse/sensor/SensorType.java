@@ -2,14 +2,14 @@ package com.h4313.deephouse.sensor;
 
 public enum SensorType {
 
-	TEMPERATURE(true,"A55A1005"), 
-	SWITCH(true,"A55A0B05"),
-	LIGHT(true,"00000000"), 
-	PRESENCE(true,"00000000"), 
-	HUMIDITY(false,"00000000"), 
-	NOISE(false,"00000000"), 
-	SMOKE(false,"00000000"), 
-	SMELL(false,"00000000");
+	TEMPERATURE(true,"A55A1005","Temperature"), 
+	SWITCH(true,"A55A0B05","Switch"),
+	LIGHT(true,"A55A0005","Light"), 
+	PRESENCE(true,"00000000","Presence"), 
+	HUMIDITY(false,"00000000","Humidity"), 
+	NOISE(false,"00000000","Noise"), 
+	SMOKE(false,"00000000","Smoke"), 
+	SMELL(false,"00000000","Smell");
 
 	/*
 	 * true if the sensor is a physical one false if it's a virtual one
@@ -18,10 +18,13 @@ public enum SensorType {
 	
 	//typeFrame has to be 4 byte long => 8 hexa characters
 	private final String typeFrame;
+	
+	private final String name;
 
-	SensorType(boolean physical, String typeFrame) {
+	SensorType(boolean physical, String typeFrame, String name) {
 		this.typeFrame = typeFrame;
 		this.physical = physical;
+		this.name = name;
 	}
 
 	public boolean isPhysical() {
@@ -30,6 +33,10 @@ public enum SensorType {
 	
 	public String getTypeFrame() {
 		return typeFrame;
+	}
+	
+	public String toString() {
+		return name;
 	}
 
 }

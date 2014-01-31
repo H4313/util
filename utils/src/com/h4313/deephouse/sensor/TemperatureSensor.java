@@ -17,7 +17,7 @@ public class TemperatureSensor extends Sensor {
 	}
 
 	@Override
-	public String getDatas() {
+	protected String getDatas() {
 		String datas = "";
 		for(int i=0 ; i<Constant.FRAME_DATA_LENGTH_BYTES - Constant.SENSOR_TEMPERATURE_BYTES ; i++) {
 			datas += "00";
@@ -44,7 +44,7 @@ public class TemperatureSensor extends Sensor {
 	}
 	
 	@Override
-	public String dataString() {
+	protected String dataString() {
 		return lastValue.toString();
 	}
 }

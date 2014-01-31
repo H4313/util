@@ -11,7 +11,7 @@ public class HumiditySensor extends Sensor {
 		this.type = type;
 	}
 
-	public String getDatas() {
+	protected String getDatas() {
 		String datas = "";
 		// TODO ecrire datas
 		return datas;
@@ -24,7 +24,7 @@ public class HumiditySensor extends Sensor {
 	}
 	
 	@Override
-	public String dataString() {
+	protected String dataString() {
 		return null;
 	}
 }

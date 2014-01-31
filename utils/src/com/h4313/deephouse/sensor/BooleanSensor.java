@@ -21,7 +21,7 @@ public class BooleanSensor extends Sensor implements Serializable{
 	
 	protected boolean lastValue;
 	
-	public BooleanSensor(String id, SensorType type) {
+	public BooleanSensor(String id, SensorType type, String falseText, String truetext) {
 		this.id = id;
 		this.type = type;
 		this.lastValue=false;
@@ -30,7 +30,7 @@ public class BooleanSensor extends Sensor implements Serializable{
 	
 	
 	@Transient
-	public String getDatas() {
+	protected String getDatas() {
 		String datas = "";
 		if(lastValue) {
 			datas += Constant.SENSOR_BOOLEAN_DATAS_TRUE;
@@ -61,7 +61,7 @@ public class BooleanSensor extends Sensor implements Serializable{
 	}
 	
 	@Override
-	public String dataString() {
+	protected String dataString() {
 		if(lastValue) {
 			return "True";
 		}

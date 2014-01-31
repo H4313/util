@@ -35,7 +35,7 @@ public abstract class Sensor implements Serializable {
 	public abstract void update(Frame frame) throws DeepHouseException;
 	
 	@Transient
-	public abstract String getDatas();
+	protected abstract String getDatas();
 	
 	@Id
 	@Column(name="id", nullable=false)
@@ -57,11 +57,11 @@ public abstract class Sensor implements Serializable {
 	}
 	
 	public String toString() {
-		String text = type+" sensor / Value: "+dataString();
+		String text = type.toString()+" sensor / Value: "+dataString();
 		return text;
 	}
 	
-	public abstract String dataString();
+	protected abstract String dataString();
 	
 	
 

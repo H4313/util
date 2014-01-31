@@ -10,22 +10,22 @@ public class SensorFactory {
 		switch (type) {
 
 		case LIGHT:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "OFF", "ON");
 
 		case PRESENCE:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "Not present", "present");
 
 		case SWITCH:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "OFF", "ON");
 
 		case SMELL:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "", "");
 
 		case SMOKE:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "", "");
 
 		case NOISE:
-			return new BooleanSensor(id, type);
+			return new BooleanSensor(id, type, "", "");
 
 		case HUMIDITY:
 			return new HumiditySensor(id, type);
