@@ -54,7 +54,8 @@ public abstract class Room implements Serializable {
 		this.sensors = sensors;
 	}
 
-	@Column(name = "sensors", nullable = true)
+	
+	@Column(name="actuators", nullable=true)
 	public ActuatorSet getActuators() {
 		return actuators;
 	}

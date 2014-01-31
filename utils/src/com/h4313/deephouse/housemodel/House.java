@@ -2,11 +2,14 @@ package com.h4313.deephouse.housemodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CollectionOfElements;
 import org.json.JSONObject;
 
 import com.h4313.deephouse.actuator.Actuator;
@@ -24,8 +27,11 @@ public class House implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "rooms", nullable = false)
-	protected ArrayList<Room> rooms;
+	
+	
+	
+	protected List<Room> rooms;
+
 
 	protected int idHouse;
 
@@ -36,6 +42,69 @@ public class House implements Serializable {
 			rooms.add(RoomFactory.createInstance(i));
 		}
 	}
+
+
+//	/**
+//	 * JSON Structure
+//	 * 
+//	 * “piece” : “numPiece”, “capteur” : “idCapteur”, “type “ : “typeCapteur”
+//	 * */
+//	public void addSensor(JSONObject json) throws DeepHouseException {
+//		Object roomType, sensorType;
+//		String idSensor;
+//		try {
+//			roomType = json.get("piece");
+//			idSensor = json.getString("capteur");
+//			sensorType = json.get("type");
+//		} catch (Exception e) {
+//			throw new DeepHouseFormatException("MalFormed JSON "
+//					+ e.getMessage());
+//		}
+//		if (roomType instanceof RoomType && sensorType instanceof SensorType) {
+//			Room r = this.getOrAddRoom((RoomType) roomType);
+//			r.sensors.addSensor(idSensor, (SensorType) sensorType);
+//		} else {
+//			throw new DeepHouseFormatException(
+//					"MalFormed JSON : unknown room or sensor type");
+//		}
+//	}
+//
+//	/**
+//	 * If the room exists => get room
+//	 * 
+//	 * if not => create room
+//	 * */
+//	public Room getOrAddRoom(RoomType type) throws DeepHouseException {
+//		for (Room r : rooms) {
+//			if (r.idRoom == type.getId()) {
+//				return r;
+//			}
+//		}
+//		Room newRoom = RoomFactory.createInstance(type);
+//		this.rooms.add(newRoom);
+//		return newRoom;
+//	}
+//	
+//	
+//	public Sensor updateSensor(Frame frame) throws DeepHouseException {
+//		for(Room r : rooms) {
+//			if(r.sensors.containsValue(frame.getId())) {
+//				r.sensors.updateSensor(frame);
+//				return r.sensors.get(frame.getId());
+//			}
+//		}
+//		return null;
+//	}
+//	
+//	public Actuator updateActuator(Frame frame) throws DeepHouseException {
+//		for(Room r : rooms) {
+//			if(r.actuators.containsValue(frame.getId())) {
+//				r.actuators.updateActuator(frame);
+//				return r.actuators.get(frame.getId());
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
 	 * JSON Structure
@@ -62,8 +131,12 @@ public class House implements Serializable {
 					"MalFormed JSON : unknown room or sensor type");
 		}
 	}
-	
-	
+
+	@CollectionOfElements// @Column(name = "rooms", nullable = true)
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
 	public Sensor updateSensor(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
 			if(r.sensors.containsValue(frame.getId())) {
@@ -84,14 +157,12 @@ public class House implements Serializable {
 		return null;
 	}
 
-	@Column(name = "rooms", nullable = true)
-	public ArrayList<Room> getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(ArrayList<Room> rooms) {
+	
+	
+	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
+
 
 	@Id
 	@Column(name = "idhouse", nullable = false)
