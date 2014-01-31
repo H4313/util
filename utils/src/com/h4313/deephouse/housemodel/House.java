@@ -62,22 +62,6 @@ public class House implements Serializable {
 					"MalFormed JSON : unknown room or sensor type");
 		}
 	}
-
-	/**
-	 * If the room exists => get room
-	 * 
-	 * if not => create room
-	 * */
-	public Room getOrAddRoom(RoomType type) throws DeepHouseException {
-		for (Room r : rooms) {
-			if (r.idRoom == type.getId()) {
-				return r;
-			}
-		}
-		Room newRoom = RoomFactory.createInstance(type);
-		this.rooms.add(newRoom);
-		return newRoom;
-	}
 	
 	
 	public Sensor updateSensor(Frame frame) throws DeepHouseException {
