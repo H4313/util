@@ -18,6 +18,9 @@ public class BooleanSensor extends Sensor implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	protected String falseText;
+	
+	protected String trueText;
 	
 	protected boolean lastValue;
 	
@@ -25,6 +28,8 @@ public class BooleanSensor extends Sensor implements Serializable{
 		this.id = id;
 		this.type = type;
 		this.lastValue=false;
+		this.falseText = falseText;
+		this.trueText = truetext;
 	}
 	
 	
@@ -63,10 +68,10 @@ public class BooleanSensor extends Sensor implements Serializable{
 	@Override
 	protected String dataString() {
 		if(lastValue) {
-			return "True";
-		}
+			return trueText;
+		} 
 		else {
-			return "False";
+			return falseText;
 		}
 	}
 	

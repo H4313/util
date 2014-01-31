@@ -12,9 +12,12 @@ public class ActuatorFactory {
 
 			return new Radiator(id,type);
 
-		case CLIMA:
+		case AIRCONDITION:
 			// a voir
 			return new Radiator(id,type);
+			
+		case LIGHTCONTROL:
+			return new LightControl(id,type);
 		}
 		throw new DeepHouseFormatException("Unknown Actuator type");
 	}

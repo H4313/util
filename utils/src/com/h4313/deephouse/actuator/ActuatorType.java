@@ -3,7 +3,7 @@ package com.h4313.deephouse.actuator;
 public enum ActuatorType {
 	RADIATOR(false,"B55A1005","Radiator"),
 	LIGHTCONTROL(false,"","Light control"),
-	CLIMA(false,"00000000","Air conditioner");
+	AIRCONDITION(false,"B55A1105","Air conditioner");
 	
 	/*
 	 * true if the actuator is a physical one false if it's a virtual one
@@ -27,5 +27,9 @@ public enum ActuatorType {
 	
 	public String getTypeFrame() {
 		return typeFrame;
+	}
+	
+	public String toString() {
+		return name;
 	}
 }
