@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.h4313.deephouse.actuator.ActuatorSet;
 import com.h4313.deephouse.exceptions.DeepHouseException;
@@ -45,7 +46,7 @@ public abstract class Room implements Serializable {
 		this.idRoom = idRoom;
 	}
 
-	@Column(name = "sensors", nullable = true)
+	@Transient
 	public SensorSet getSensors() {
 		return sensors;
 	}
@@ -55,7 +56,7 @@ public abstract class Room implements Serializable {
 	}
 
 	
-	@Column(name="actuators", nullable=true)
+	@Transient
 	public ActuatorSet getActuators() {
 		return actuators;
 	}
