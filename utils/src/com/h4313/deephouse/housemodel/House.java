@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
+import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
+import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
 
 public class House {
@@ -59,12 +61,23 @@ public class House {
 	}
 	
 	
-	public void updateSensor(Frame frame) throws DeepHouseException {
+	public Sensor updateSensor(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
 			if(r.sensors.containsValue(frame.getId())) {
 				r.sensors.updateSensor(frame);
-				return;
+				return r.sensors.get(frame.getId());
 			}
 		}
+		return null;
+	}
+	
+	public Actuator updateActuator(Frame frame) throws DeepHouseException {
+		for(Room r : rooms) {
+			if(r.actuators.containsValue(frame.getId())) {
+				r.actuators.updateActuator(frame);
+				return r.actuators.get(frame.getId());
+			}
+		}
+		return null;
 	}
 }
