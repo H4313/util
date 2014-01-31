@@ -18,7 +18,7 @@ public class DeepHouseCalendar
     }
 
     /**
-     * MÃ©thode permettant de renvoyer une instance de la classe Singleton
+     * Méthode permettant de renvoyer une instance de la classe Singleton
      * @return Retourne l'instance du singleton.
      */
     public final static DeepHouseCalendar getInstance() {
