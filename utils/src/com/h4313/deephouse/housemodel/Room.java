@@ -18,6 +18,12 @@ import com.h4313.deephouse.sensor.SensorType;
 public abstract class Room implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	protected int idRoom;
 
 	
