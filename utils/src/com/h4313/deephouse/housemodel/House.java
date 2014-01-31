@@ -27,15 +27,14 @@ public class House implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	
+	private static volatile House instance = null;	
 	
 	protected List<Room> rooms;
 
 
 	protected int idHouse;
 
-	public House() {
+	private House() {
 		this.idHouse = 0;
 		rooms = new ArrayList<Room>();
 		for (int i = 0; i < RoomConstants.NB_PIECES; i++) {
@@ -43,11 +42,25 @@ public class House implements Serializable {
 		}
 	}
 
+	/**
+     * MÃ©thode permettant de renvoyer une instance de la classe Singleton
+     * @return Retourne l'instance du singleton.
+     */
+    public final static House getInstance() {
+        if (House.instance == null) {
+           synchronized(House.class) {
+             if (House.instance == null) {
+            	 House.instance = new House();
+             }
+           }
+        }
+        return House.instance;
+    }
 
 //	/**
 //	 * JSON Structure
 //	 * 
-//	 * “piece” : “numPiece”, “capteur” : “idCapteur”, “type “ : “typeCapteur”
+//	 * ï¿½pieceï¿½ : ï¿½numPieceï¿½, ï¿½capteurï¿½ : ï¿½idCapteurï¿½, ï¿½type ï¿½ : ï¿½typeCapteurï¿½
 //	 * */
 //	public void addSensor(JSONObject json) throws DeepHouseException {
 //		Object roomType, sensorType;
@@ -109,7 +122,7 @@ public class House implements Serializable {
 	/**
 	 * JSON Structure
 	 * 
-	 * “piece” : “numPiece”, “capteur” : “idCapteur”, “type “ : “typeCapteur”
+	 * ï¿½pieceï¿½ : ï¿½numPieceï¿½, ï¿½capteurï¿½ : ï¿½idCapteurï¿½, ï¿½type ï¿½ : ï¿½typeCapteurï¿½
 	 * */
 	public void addSensor(JSONObject json) throws DeepHouseException {
 		Object sensorType;
