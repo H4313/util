@@ -10,11 +10,6 @@
 			<attribute name="owner.project.facets" value="jst.utility"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="lib/ant-1.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/ant-antlr-1.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/ant-junit-1.6.5.jar"/>
@@ -40,5 +35,6 @@
 	<classpathentry kind="lib" path="lib/versioncheck.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/ant-launcher-1.6.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

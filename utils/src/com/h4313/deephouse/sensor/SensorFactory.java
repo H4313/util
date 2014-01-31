@@ -15,20 +15,20 @@ public class SensorFactory {
 		case PRESENCE:
 			return new BooleanSensor(id, type, "Nobody in the room", "Someone in the room");
 
-		case SWITCH:
-			return new BooleanSensor(id, type, "OFF", "ON");
+		case WINDOW:
+			return new BooleanSensor(id, type, "CLOSE", "OPEN");
 
-		case SMELL:
-			return new BooleanSensor(id, type, "", "");
-
-		case SMOKE:
-			return new BooleanSensor(id, type, "", "");
-
-		case NOISE:
-			return new BooleanSensor(id, type, "", "");
-
-		case HUMIDITY:
-			return new HumiditySensor(id, type);
+//		case SMELL:
+//			return new BooleanSensor(id, type, "", "");
+//
+//		case SMOKE:
+//			return new BooleanSensor(id, type, "", "");
+//
+//		case NOISE:
+//			return new BooleanSensor(id, type, "", "");
+//
+//		case HUMIDITY:
+//			return new HumiditySensor(id, type);
 
 		case TEMPERATURE:
 			return new TemperatureSensor(id, type);
