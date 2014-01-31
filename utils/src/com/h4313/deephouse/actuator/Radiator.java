@@ -14,7 +14,7 @@ public class Radiator extends Actuator {
 	}
 
 	@Override
-	public String getDatas() {
+	protected String getDatas() {
 		String datas = "";
 		for(int i=0 ; i<Constant.FRAME_DATA_LENGTH_BYTES - Constant.SENSOR_TEMPERATURE_BYTES ; i++) {
 			datas += "00";
@@ -38,6 +38,11 @@ public class Radiator extends Actuator {
 					  *(Constant.SENSOR_TEMPERATURE_MAX - Constant.SENSOR_TEMPERATURE_MIN)
 					  /Math.pow(2, 8*Constant.SENSOR_TEMPERATURE_BYTES);
 		this.setValue = temp;
+	}
+	
+	@Override
+	protected String dataString() {
+		return setValue.toString()+" °C";
 	}
 
 }

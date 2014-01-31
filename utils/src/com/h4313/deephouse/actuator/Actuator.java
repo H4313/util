@@ -28,7 +28,14 @@ public abstract class Actuator {
 		return frame;
 	}
 
-	public abstract String getDatas();
+	protected abstract String getDatas();
 	
 	public abstract void update(Frame frame) throws DeepHouseException;
+	
+	public String toString() {
+		String text = type+" actuator / Value: "+dataString();
+		return text;
+	}
+	
+	protected abstract String dataString();
 }
