@@ -23,16 +23,18 @@ public class House implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	@Column(name="rooms", nullable=false)
+
+	@Column(name = "rooms", nullable = false)
 	protected ArrayList<Room> rooms;
 
 	protected int idHouse;
-	
+
 	public House() {
+		this.idHouse = 0;
 		rooms = new ArrayList<Room>();
-		this.idHouse=0;
+		for (int i = 0; i < RoomConstants.NB_PIECES; i++) {
+			rooms.add(RoomFactory.createInstance(i));
+		}
 	}
 
 	/**
@@ -41,18 +43,19 @@ public class House implements Serializable {
 	 * “piece” : “numPiece”, “capteur” : “idCapteur”, “type “ : “typeCapteur”
 	 * */
 	public void addSensor(JSONObject json) throws DeepHouseException {
-		Object roomType, sensorType;
+		Object sensorType;
+		int roomId;
 		String idSensor;
 		try {
-			roomType = json.get("piece");
+			roomId = json.getInt("piece");
 			idSensor = json.getString("capteur");
 			sensorType = json.get("type");
 		} catch (Exception e) {
 			throw new DeepHouseFormatException("MalFormed JSON "
 					+ e.getMessage());
 		}
-		if (roomType instanceof RoomType && sensorType instanceof SensorType) {
-			Room r = this.getOrAddRoom((RoomType) roomType);
+		if (sensorType instanceof SensorType) {
+			Room r = rooms.get(roomId);
 			r.sensors.addSensor(idSensor, (SensorType) sensorType);
 		} else {
 			throw new DeepHouseFormatException(
@@ -60,6 +63,11 @@ public class House implements Serializable {
 		}
 	}
 
+<<<<<<< HEAD
+	public void updateSensor(Frame frame) throws DeepHouseException {
+		for (Room r : rooms) {
+			if (r.sensors.containsValue(frame.getId())) {
+=======
 	/**
 	 * If the room exists => get room
 	 * 
@@ -80,6 +88,7 @@ public class House implements Serializable {
 	public Sensor updateSensor(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
 			if(r.sensors.containsValue(frame.getId())) {
+>>>>>>> b8eb76994d5773f0ae3a2cf953c4a57e98eabdd7
 				r.sensors.updateSensor(frame);
 				return r.sensors.get(frame.getId());
 			}
@@ -96,18 +105,18 @@ public class House implements Serializable {
 		}
 		return null;
 	}
-	
-	@Column(name="rooms", nullable=true)
+
+	@Column(name = "rooms", nullable = true)
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}
-	
+
 	public void setRooms(ArrayList<Room> rooms) {
 		this.rooms = rooms;
 	}
-	
+
 	@Id
-	@Column(name="idhouse", nullable=false)
+	@Column(name = "idhouse", nullable = false)
 	public int getIdHouse() {
 		return idHouse;
 	}
@@ -115,8 +124,5 @@ public class House implements Serializable {
 	public void setIdHouse(int idHouse) {
 		this.idHouse = idHouse;
 	}
-	
-	
-	
-	
+
 }

@@ -8,42 +8,35 @@ import javax.persistence.Id;
 
 import com.h4313.deephouse.actuator.ActuatorSet;
 import com.h4313.deephouse.exceptions.DeepHouseException;
-import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorSet;
 import com.h4313.deephouse.sensor.SensorType;
 
-//QUestion: ca sert a qlq chose a sous-classer room:-?
-
 @Entity
 public abstract class Room implements Serializable {
-	
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	protected int idRoom;
 
-	
 	protected SensorSet sensors;
-	
 
 	protected ActuatorSet actuators;
-	
+
 	public Room(int id) {
 		this.idRoom = id;
 		this.sensors = new SensorSet();
 		this.actuators = new ActuatorSet();
 	}
-	
-	public void addSensor(String id, SensorType type) throws DeepHouseException{
+
+	public void addSensor(String id, SensorType type) throws DeepHouseException {
 		this.sensors.addSensor(id, type);
 	}
-	
+
 	@Id
-	@Column(name="idRoom", nullable=false)
+	@Column(name = "idRoom", nullable = false)
 	public int getIdRoom() {
 		return idRoom;
 	}
@@ -51,8 +44,8 @@ public abstract class Room implements Serializable {
 	public void setIdRoom(int idRoom) {
 		this.idRoom = idRoom;
 	}
-	
-	@Column(name="sensors", nullable=true)
+
+	@Column(name = "sensors", nullable = true)
 	public SensorSet getSensors() {
 		return sensors;
 	}
@@ -60,8 +53,8 @@ public abstract class Room implements Serializable {
 	public void setSensors(SensorSet sensors) {
 		this.sensors = sensors;
 	}
-	
-	@Column(name="sensors", nullable=true)
+
+	@Column(name = "sensors", nullable = true)
 	public ActuatorSet getActuators() {
 		return actuators;
 	}
@@ -69,5 +62,5 @@ public abstract class Room implements Serializable {
 	public void setActuators(ActuatorSet actuators) {
 		this.actuators = actuators;
 	}
-	
+
 }
