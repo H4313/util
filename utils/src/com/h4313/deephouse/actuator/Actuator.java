@@ -38,4 +38,12 @@ public abstract class Actuator {
 	}
 	
 	protected abstract String dataString();
+	
+	public boolean getModified() {
+		return modified;
+	}
+	
+	public void setModified(boolean modified) {
+		this.modified = modified;
+	}
 }
