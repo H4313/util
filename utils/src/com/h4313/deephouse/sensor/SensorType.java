@@ -5,7 +5,7 @@ public enum SensorType {
 	TEMPERATURE(true,"A55A1005","Temperature"), 
 	SWITCH(true,"A55A0B05","Switch"),
 	LIGHT(true,"A55A0005","Light"), 
-	PRESENCE(true,"00000000","Presence"), 
+	PRESENCE(true,"A55A0105","Presence"), 
 	HUMIDITY(false,"00000000","Humidity"), 
 	NOISE(false,"00000000","Noise"), 
 	SMOKE(false,"00000000","Smoke"), 
