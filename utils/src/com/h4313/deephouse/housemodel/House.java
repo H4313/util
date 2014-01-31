@@ -1,6 +1,11 @@
 package com.h4313.deephouse.housemodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import org.json.JSONObject;
 
@@ -11,12 +16,23 @@ import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
 
-public class House {
+@Entity
+public class House implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	@Column(name="rooms", nullable=false)
 	protected ArrayList<Room> rooms;
 
+	protected int idHouse;
+	
 	public House() {
 		rooms = new ArrayList<Room>();
+		this.idHouse=0;
 	}
 
 	/**
@@ -49,7 +65,7 @@ public class House {
 	 * 
 	 * if not => create room
 	 * */
-	private Room getOrAddRoom(RoomType type) throws DeepHouseException {
+	public Room getOrAddRoom(RoomType type) throws DeepHouseException {
 		for (Room r : rooms) {
 			if (r.idRoom == type.getId()) {
 				return r;
@@ -80,4 +96,27 @@ public class House {
 		}
 		return null;
 	}
+	
+	@Column(name="rooms", nullable=true)
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+	
+	public void setRooms(ArrayList<Room> rooms) {
+		this.rooms = rooms;
+	}
+	
+	@Id
+	@Column(name="idhouse", nullable=false)
+	public int getIdHouse() {
+		return idHouse;
+	}
+
+	public void setIdHouse(int idHouse) {
+		this.idHouse = idHouse;
+	}
+	
+	
+	
+	
 }
