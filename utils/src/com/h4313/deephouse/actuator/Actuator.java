@@ -10,10 +10,12 @@ public abstract class Actuator {
 	protected ActuatorType type;
 	// todo : maybe a list (synchronized)
 	protected SensorSet sensors;
+	protected boolean modified;
 
 	public Actuator(String id, ActuatorType type) {
 		this.id = id;
 		sensors = new SensorSet();
+		this.modified = false;
 	}
 
 	public String getFrame() {

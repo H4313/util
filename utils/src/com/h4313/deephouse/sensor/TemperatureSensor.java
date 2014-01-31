@@ -42,4 +42,9 @@ public class TemperatureSensor extends Sensor {
 					  /Math.pow(2, 8*Constant.SENSOR_TEMPERATURE_BYTES);
 		this.lastValue = temp;
 	}
+	
+	@Override
+	public String dataString() {
+		return lastValue.toString();
+	}
 }

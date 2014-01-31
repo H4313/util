@@ -2,8 +2,6 @@ package com.h4313.deephouse.sensor;
 
 import java.io.Serializable;
 
-import javax.persistence.Transient;
-
 import javax.persistence.*;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
@@ -22,10 +20,6 @@ public class BooleanSensor extends Sensor implements Serializable{
 
 	
 	protected boolean lastValue;
-	
-	public BooleanSensor(){
-		
-	}
 	
 	public BooleanSensor(String id, SensorType type) {
 		this.id = id;
@@ -66,5 +60,14 @@ public class BooleanSensor extends Sensor implements Serializable{
 		this.lastValue = lastValue;
 	}
 	
+	@Override
+	public String dataString() {
+		if(lastValue) {
+			return "True";
+		}
+		else {
+			return "False";
+		}
+	}
 	
 }

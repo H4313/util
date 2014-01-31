@@ -22,4 +22,9 @@ public class HumiditySensor extends Sensor {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public String dataString() {
+		return null;
+	}
 }

@@ -56,6 +56,12 @@ public abstract class Sensor implements Serializable {
 		this.type = type;
 	}
 	
+	public String toString() {
+		String text = type+" sensor / Value: "+dataString();
+		return text;
+	}
+	
+	public abstract String dataString();
 	
 	
 
