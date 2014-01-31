@@ -4,11 +4,11 @@ public abstract class RoomConstants {
 
 	public static final int NB_PIECES = 6;
 
-	public static final int ID_SALON = 0;
-	public static final int ID_CUISINE = 1;
-	public static final int ID_WC_SALLEBAIN = 2;
-	public static final int ID_CHAMBRE1 = 3;
-	public static final int ID_CHAMBRE2 = 4;
-	public static final int ID_COULOIR = 5;
+	public static final int ID_LIVING_ROOM = 0;
+	public static final int ID_KITCHEN = 1;
+	public static final int ID_BATHROOM = 2;
+	public static final int ID_BEDROOM = 3;
+	public static final int ID_OFFICE = 4;
+	public static final int ID_CORRIDOR = 5;
 
 }
