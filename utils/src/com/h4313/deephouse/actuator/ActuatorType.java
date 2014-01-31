@@ -2,8 +2,9 @@ package com.h4313.deephouse.actuator;
 
 public enum ActuatorType {
 	RADIATOR(false,"B55A1005","Radiator"),
-	LIGHTCONTROL(false,"","Light control"),
-	AIRCONDITION(false,"B55A1105","Air conditioner");
+	LIGHTCONTROL(false,"B55A0005","Light control"),
+	AIRCONDITION(false,"B55A1105","Air conditioner"),
+	WINDOWCLOSER(false,"B55A0105","Window closer");
 	
 	/*
 	 * true if the actuator is a physical one false if it's a virtual one

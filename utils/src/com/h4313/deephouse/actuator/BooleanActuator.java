@@ -6,14 +6,20 @@ import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 
-public class LightControl extends Actuator {
+public class BooleanActuator extends Actuator {
 	
 	private static final long serialVersionUID = 1L;
 	
 	protected boolean lastValue;
 	
-	public LightControl(String id, ActuatorType type) {
+	protected String trueText;
+	
+	protected String falseText;
+	
+	public BooleanActuator(String id, ActuatorType type, String falseText, String trueText) {
 		super(id,type);
+		this.trueText = trueText;
+		this.falseText = falseText;
 	}
 	
 	
@@ -51,10 +57,10 @@ public class LightControl extends Actuator {
 	@Override
 	protected String dataString() {
 		if(lastValue) {
-			return "Lights are on";
+			return trueText;
 		}
 		else {
-			return "Lights are off";
+			return falseText;
 		}
 	}
 

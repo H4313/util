@@ -17,7 +17,10 @@ public class ActuatorFactory {
 			return new Radiator(id,type);
 			
 		case LIGHTCONTROL:
-			return new LightControl(id,type);
+			return new BooleanActuator(id,type,"OFF","ON");
+			
+		case WINDOWCLOSER:
+			return new BooleanActuator(id,type,"Closed","Opened");
 		}
 		throw new DeepHouseFormatException("Unknown Actuator type");
 	}
