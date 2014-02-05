@@ -6,34 +6,32 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import com.h4313.deephouse.exceptions.*;
-import com.h4313.deephouse.housemodel.Room;
+import com.h4313.deephouse.sensor.*;
 
 
-public class RoomDAO extends DAO<Room> {
-
-	@Override
-	public Room find(Object id) throws DeepHouseTypeException {
-		
-		if (!(id instanceof Integer)) {
-			throw new DeepHouseTypeException("Object is not good type, except : Integer");
-		}
-		return (Room) session.get(Room.class,(Integer) id );
-		
-		
-	}
-	
-	
-
-
+public class SensorDAO extends DAO<Sensor<Object>> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Room> findAll() {
-			return session.createQuery("FROM "+Room.class.getName()).list();
+	public Sensor<Object> find(Object id) throws DeepHouseTypeException {
+		
+		if (!(id instanceof String)) {
+			throw new DeepHouseTypeException("Object is not good type, except : String");
+		}
+		return (Sensor<Object>) session.get(Sensor.class,(String) id );
+		
+		
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Sensor<Object>> findAll() {
+			return session.createQuery("FROM "+Sensor.class.getName()).list();
 	}
 
 	@Override
-	public Room createUpdate(Room obj){
+	public Sensor<Object> createUpdate(Sensor<Object> obj){
 		Transaction transaction = null;
 		try {
 			
@@ -52,7 +50,7 @@ public class RoomDAO extends DAO<Room> {
 	}
 
 	@Override
-	public void delete(Room obj) {
+	public void delete(Sensor<Object> obj) {
 		Transaction transaction = null;
 		try {
 			

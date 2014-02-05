@@ -4,10 +4,9 @@ package com.h4313.deephouse.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
+import com.h4313.deephouse.exceptions.DeepHouseTypeException;
 import com.h4313.deephouse.util.HibernateUtil;
 
 public abstract class DAO<T> {
@@ -22,8 +21,9 @@ public abstract class DAO<T> {
 		 * Permet de récupérer un objet via son ID
 		 * @param id
 		 * @return
+		 * @throws DeepHouseTypeException 
 		 */
-		public abstract T find(int id);
+		public abstract T find(Object id) throws DeepHouseTypeException;
 		
 		/**
 		 * Permet de récupèrer l'ensemble des objets de type T
@@ -37,22 +37,8 @@ public abstract class DAO<T> {
 		 * par rapport à un objet
 		 * @param obj
 		 */
-		public  T createUpdate(T obj) {
-			Transaction transaction = null;
-			try {
-				
-				transaction = session.beginTransaction();		
-				session.saveOrUpdate(obj);
-				transaction.commit();
-			
-			} catch (HibernateException e) {
-				transaction.rollback();
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
-			return obj;
-		}
+		public abstract T createUpdate(T obj) ;
+		
 		
 
 		

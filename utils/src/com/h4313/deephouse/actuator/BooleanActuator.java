@@ -1,11 +1,14 @@
 package com.h4313.deephouse.actuator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 
+@Entity
 public class BooleanActuator extends Actuator {
 	
 	private static final long serialVersionUID = 1L;
@@ -20,6 +23,9 @@ public class BooleanActuator extends Actuator {
 		super(id,type);
 		this.trueText = trueText;
 		this.falseText = falseText;
+	}
+	public BooleanActuator(){
+		
 	}
 	
 	
@@ -46,6 +52,7 @@ public class BooleanActuator extends Actuator {
 		}
 	}
 	
+	@Column
 	public boolean getLastValue() {
 		return lastValue;
 	}
@@ -63,5 +70,24 @@ public class BooleanActuator extends Actuator {
 			return falseText;
 		}
 	}
+	
+	@Column
+	public String getTrueText() {
+		return trueText;
+	}
+	
+	public void setTrueText(String trueText) {
+		this.trueText = trueText;
+	}
+	
+	@Column
+	public String getFalseText() {
+		return falseText;
+	}
+	
+	public void setFalseText(String falseText) {
+		this.falseText = falseText;
+	}
+	
 
 }

@@ -1,12 +1,22 @@
 package com.h4313.deephouse.actuator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 import com.h4313.deephouse.util.DecToHexConverter;
 
+
+@Entity
 public class Radiator extends Actuator {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Double setValue;
 
 	public Radiator(String id, ActuatorType type) {
@@ -14,6 +24,7 @@ public class Radiator extends Actuator {
 	}
 
 	@Override
+	@Transient
 	protected String getDatas() {
 		String datas = "";
 		for(int i=0 ; i<Constant.FRAME_DATA_LENGTH_BYTES - Constant.SENSOR_TEMPERATURE_BYTES ; i++) {
@@ -44,5 +55,16 @@ public class Radiator extends Actuator {
 	protected String dataString() {
 		return setValue.toString()+" °C";
 	}
+
+	@Column
+	public Double getSetValue() {
+		return setValue;
+	}
+
+	public void setSetValue(Double setValue) {
+		this.setValue = setValue;
+	}
+	
+	
 
 }

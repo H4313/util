@@ -1,19 +1,26 @@
 package com.h4313.deephouse.sensor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 import com.h4313.deephouse.util.DecToHexConverter;
 
+@Entity
 public class TemperatureSensor extends Sensor<Double> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8896967581122609319L;
+	
+	private static final long serialVersionUID = 1L;
+	
 	
 	protected Double lastValue;
+	
+	public TemperatureSensor() {
+	}
 	
 	public TemperatureSensor(String id, SensorType type) {
 		this.id = id;
@@ -21,6 +28,7 @@ public class TemperatureSensor extends Sensor<Double> {
 		lastValue = Double.valueOf(25.0);
 	}
 	
+	@Transient
 	public Double getLastValue() {
 		return this.lastValue;
 	}
@@ -30,6 +38,7 @@ public class TemperatureSensor extends Sensor<Double> {
 	}
 
 	@Override
+	@Transient
 	protected String getDatas() {
 		String datas = "";
 		for(int i=0 ; i<Constant.FRAME_DATA_LENGTH_BYTES - Constant.SENSOR_TEMPERATURE_BYTES ; i++) {

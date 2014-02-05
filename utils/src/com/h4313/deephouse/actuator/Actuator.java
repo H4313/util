@@ -1,23 +1,46 @@
 package com.h4313.deephouse.actuator;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import com.h4313.deephouse.exceptions.DeepHouseDuplicateException;
 import com.h4313.deephouse.exceptions.DeepHouseException;
+import com.h4313.deephouse.exceptions.DeepHouseNotFoundException;
 import com.h4313.deephouse.frame.Frame;
-import com.h4313.deephouse.sensor.SensorSet;
+import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.util.Constant;
 
-public abstract class Actuator {
+@Entity
+public abstract class Actuator implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected ActuatorType type;
 	// todo : maybe a list (synchronized)
-	protected SensorSet sensors;
+	protected  Map<String,Sensor<Object>> sensors;
 	protected boolean modified;
 
 	public Actuator(String id, ActuatorType type) {
 		this.id = id;
-		sensors = new SensorSet();
+		sensors =  new HashMap<String, Sensor<Object>>();
 		this.modified = false;
 	}
+	public Actuator() {
+	}
 
+	@Transient
 	public String getFrame() {
 		String frame = "";
 		// TODO ecriture des trames
@@ -27,7 +50,8 @@ public abstract class Actuator {
 		frame += Constant.FRAME_STATUS_AND_CHECKSUM;
 		return frame;
 	}
-
+	
+	@Transient
 	protected abstract String getDatas();
 	
 	public abstract void update(Frame frame) throws DeepHouseException;
@@ -39,6 +63,27 @@ public abstract class Actuator {
 	
 	protected abstract String dataString();
 	
+	
+	
+	public void addSensor(Sensor<Object> sensor) throws DeepHouseException {
+		if (sensors.get(sensor.getId()) != null) {
+			throw new DeepHouseDuplicateException("Id " + id + "already taken");
+		}
+		sensors.put(sensor.getId(), sensor);
+	}
+
+	public void updateSensor(Frame frame) throws DeepHouseException {
+		Sensor<Object> sensor = sensors.get(frame.getId());
+		if (sensor == null) {
+			throw new DeepHouseNotFoundException("Id " + frame.getId()
+					+ "not found");
+		}
+		sensor.update(frame);
+	}
+
+	
+	
+	@Column
 	public boolean getModified() {
 		return modified;
 	}
@@ -46,4 +91,40 @@ public abstract class Actuator {
 	public void setModified(boolean modified) {
 		this.modified = modified;
 	}
+	
+	@Column
+	@Id
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	@Column
+	public ActuatorType getType() {
+		return type;
+	}
+	
+	
+	public void setType(ActuatorType type) {
+		this.type = type;
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@MapKey(name = "id")
+	public Map<String, Sensor<Object>> getSensors() {
+		return sensors;
+	}
+	
+	
+	public void setSensors(Map<String, Sensor<Object>> sensors) {
+		this.sensors = sensors;
+	}
+	
+	
+
+	
+	
 }

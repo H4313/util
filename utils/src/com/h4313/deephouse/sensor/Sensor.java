@@ -33,6 +33,7 @@ public abstract class Sensor<T> implements Serializable {
 
 	public abstract void update(Frame frame) throws DeepHouseException;
 	
+	@Column
 	public abstract T getLastValue();
 
 	public abstract void setLastValue(T o);

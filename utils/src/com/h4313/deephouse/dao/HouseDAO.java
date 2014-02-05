@@ -5,21 +5,20 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import com.h4313.deephouse.exceptions.*;
-import com.h4313.deephouse.housemodel.Room;
+import com.h4313.deephouse.exceptions.DeepHouseTypeException;
+import com.h4313.deephouse.housemodel.House;
 
 
-public class RoomDAO extends DAO<Room> {
+
+public class HouseDAO extends DAO<House> {
 
 	@Override
-	public Room find(Object id) throws DeepHouseTypeException {
-		
+	public House find(Object id) throws DeepHouseTypeException  {
+
 		if (!(id instanceof Integer)) {
-			throw new DeepHouseTypeException("Object is not good type, except : Integer");
+			throw new DeepHouseTypeException(this.getClass().getName()+",   Object is not good type, except : Integer");
 		}
-		return (Room) session.get(Room.class,(Integer) id );
-		
-		
+		return (House) session.get(House.class,(Integer) id);
 	}
 	
 	
@@ -28,16 +27,16 @@ public class RoomDAO extends DAO<Room> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Room> findAll() {
-			return session.createQuery("FROM "+Room.class.getName()).list();
+	public List<House> findAll() {
+			return session.createQuery("FROM "+House.class.getName()).list();
 	}
 
 	@Override
-	public Room createUpdate(Room obj){
+	public House createUpdate(House obj){
 		Transaction transaction = null;
 		try {
 			
-			transaction = session.beginTransaction();		
+			transaction = session.beginTransaction();
 			session.saveOrUpdate(obj);
 			transaction.commit();
 			
@@ -52,10 +51,10 @@ public class RoomDAO extends DAO<Room> {
 	}
 
 	@Override
-	public void delete(Room obj) {
+	public void delete(House obj) {
 		Transaction transaction = null;
 		try {
-			
+		
 			transaction = session.beginTransaction();		
 			session.delete(obj);
 			transaction.commit();
@@ -68,10 +67,6 @@ public class RoomDAO extends DAO<Room> {
 		}
 	
 	}
-
-
-
-
 
 	
 

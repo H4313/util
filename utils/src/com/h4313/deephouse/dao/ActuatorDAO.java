@@ -6,18 +6,18 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import com.h4313.deephouse.exceptions.*;
-import com.h4313.deephouse.housemodel.Room;
+import com.h4313.deephouse.actuator.*;
 
 
-public class RoomDAO extends DAO<Room> {
+public class ActuatorDAO extends DAO<Actuator> {
 
 	@Override
-	public Room find(Object id) throws DeepHouseTypeException {
+	public Actuator find(Object id) throws DeepHouseTypeException {
 		
 		if (!(id instanceof Integer)) {
 			throw new DeepHouseTypeException("Object is not good type, except : Integer");
 		}
-		return (Room) session.get(Room.class,(Integer) id );
+		return (Actuator) session.get(Actuator.class,(Integer) id );
 		
 		
 	}
@@ -28,12 +28,12 @@ public class RoomDAO extends DAO<Room> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Room> findAll() {
-			return session.createQuery("FROM "+Room.class.getName()).list();
+	public List<Actuator> findAll() {
+			return session.createQuery("FROM "+Actuator.class.getName()).list();
 	}
 
 	@Override
-	public Room createUpdate(Room obj){
+	public Actuator createUpdate(Actuator obj){
 		Transaction transaction = null;
 		try {
 			
@@ -52,7 +52,7 @@ public class RoomDAO extends DAO<Room> {
 	}
 
 	@Override
-	public void delete(Room obj) {
+	public void delete(Actuator obj) {
 		Transaction transaction = null;
 		try {
 			

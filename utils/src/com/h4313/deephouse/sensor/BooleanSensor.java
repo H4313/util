@@ -22,6 +22,7 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 	
 	protected String trueText;
 	
+
 	protected Boolean lastValue;
 	
 	public BooleanSensor(String id, SensorType type, String falseText, String truetext) {
@@ -57,6 +58,7 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 		}
 	}
 	
+	@Transient
 	public Boolean getLastValue() {
 		return lastValue;
 	}
@@ -74,5 +76,31 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 			return falseText;
 		}
 	}
+
+
+	@Column
+	public String getFalseText() {
+		return falseText;
+	}
+
+
+
+	public void setFalseText(String falseText) {
+		this.falseText = falseText;
+	}
+
+
+	@Column
+	public String getTrueText() {
+		return trueText;
+	}
+
+
+
+	public void setTrueText(String trueText) {
+		this.trueText = trueText;
+	}
+	
+	
 	
 }
