@@ -32,6 +32,10 @@ public abstract class Room implements Serializable {
 		this.actuators = new ActuatorSet();
 	}
 
+	public Room() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void addSensor(String id, SensorType type) throws DeepHouseException {
 		this.sensors.addSensor(id, type);
 	}

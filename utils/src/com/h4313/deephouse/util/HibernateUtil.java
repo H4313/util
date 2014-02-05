@@ -22,6 +22,7 @@ public class HibernateUtil {
 			.addAnnotatedClass(BooleanSensor.class)
 			.addPackage("com.h4313.deephouse.housemodel") // le nom complet du package
 			.addAnnotatedClass(House.class)
+			.addAnnotatedClass(Room.class)
 			.addAnnotatedClass(Bedroom.class)
 			.addAnnotatedClass(LivingRoom.class)
 			.addAnnotatedClass(Kitchen.class)

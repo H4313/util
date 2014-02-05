@@ -10,6 +10,10 @@ public class Corridor extends Room {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Corridor (){
+		super();
+	}
+	
 	public Corridor(int id) {
 		super(id);
 	}
