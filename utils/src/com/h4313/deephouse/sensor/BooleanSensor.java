@@ -11,7 +11,7 @@ import com.h4313.deephouse.util.Constant;
 
 
 @Entity
-public class BooleanSensor extends Sensor implements Serializable{
+public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 
 	/**
 	 * 
@@ -22,12 +22,12 @@ public class BooleanSensor extends Sensor implements Serializable{
 	
 	protected String trueText;
 	
-	protected boolean lastValue;
+	protected Boolean lastValue;
 	
 	public BooleanSensor(String id, SensorType type, String falseText, String truetext) {
 		this.id = id;
 		this.type = type;
-		this.lastValue=false;
+		this.lastValue = false;
 		this.falseText = falseText;
 		this.trueText = truetext;
 	}
@@ -57,12 +57,12 @@ public class BooleanSensor extends Sensor implements Serializable{
 		}
 	}
 	
-	public boolean getLastValue() {
+	public Boolean getLastValue() {
 		return lastValue;
 	}
 
-	public void setLastValue(boolean lastValue) {
-		this.lastValue = lastValue;
+	public void setLastValue(Boolean lastValue) {
+		this.lastValue = Boolean.valueOf(lastValue);
 	}
 	
 	@Override

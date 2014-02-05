@@ -9,6 +9,11 @@ import com.h4313.deephouse.frame.Frame;
 
 public class ActuatorSet extends Hashtable<String, Actuator> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1808555215608817930L;
+
 	public ActuatorSet() {
 		super();
 	}

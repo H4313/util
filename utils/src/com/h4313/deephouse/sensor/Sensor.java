@@ -13,7 +13,7 @@ import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 
 @Entity
-public abstract class Sensor implements Serializable {
+public abstract class Sensor<T> implements Serializable {
 	/**
 	 * 
 	 */
@@ -24,7 +24,6 @@ public abstract class Sensor implements Serializable {
 	@Transient
 	public String getFrame() {
 		String frame = "";
-		// TODO ecriture des trames
 		frame += type.getTypeFrame();
 		frame += getDatas();
 		frame += id;
@@ -33,6 +32,11 @@ public abstract class Sensor implements Serializable {
 	}
 
 	public abstract void update(Frame frame) throws DeepHouseException;
+	
+	public abstract T getLastValue();
+
+	public abstract void setLastValue(T o);
+	
 	
 	@Transient
 	protected abstract String getDatas();

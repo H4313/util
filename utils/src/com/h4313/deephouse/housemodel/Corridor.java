@@ -14,6 +14,7 @@ public class Corridor extends Room {
 		super();
 	}
 	
+
 	public Corridor(int id) {
 		super(id);
 	}

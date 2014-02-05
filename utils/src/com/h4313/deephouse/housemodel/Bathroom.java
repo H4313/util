@@ -15,6 +15,10 @@ public class Bathroom extends Room {
 	public Bathroom (){
 		super();
 	}
+
+
+
+
 	public Bathroom(int id) {
 		super(id);
 	}

@@ -6,14 +6,27 @@ import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 import com.h4313.deephouse.util.DecToHexConverter;
 
-public class TemperatureSensor extends Sensor {
+public class TemperatureSensor extends Sensor<Double> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8896967581122609319L;
+	
 	protected Double lastValue;
 	
 	public TemperatureSensor(String id, SensorType type) {
 		this.id = id;
 		this.type = type;
-		lastValue = 25.0;
+		lastValue = Double.valueOf(25.0);
+	}
+	
+	public Double getLastValue() {
+		return this.lastValue;
+	}
+
+	public void setLastValue(Double lastValue) {
+		this.lastValue = lastValue;
 	}
 
 	@Override
@@ -45,6 +58,6 @@ public class TemperatureSensor extends Sensor {
 	
 	@Override
 	protected String dataString() {
-		return lastValue.toString();
+		return this.lastValue.toString();
 	}
 }
