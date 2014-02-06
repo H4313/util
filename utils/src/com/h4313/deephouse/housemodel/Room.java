@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.h4313.deephouse.actuator.ActuatorSet;
+import com.h4313.deephouse.actuator.ActuatorType;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.sensor.SensorSet;
 import com.h4313.deephouse.sensor.SensorType;
@@ -33,6 +34,10 @@ public abstract class Room implements Serializable {
 
 	public void addSensor(String id, SensorType type) throws DeepHouseException {
 		this.sensors.addSensor(id, type);
+	}
+	
+	public void addActuator(String id, ActuatorType type) throws DeepHouseException {
+		this.actuators.addActuator(id, type);
 	}
 
 	@Id
