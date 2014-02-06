@@ -9,18 +9,28 @@ public class ActuatorFactory {
 			throws DeepHouseException {
 		switch (type) {
 		case RADIATOR:
-
-			return new Radiator(id,type);
+			return new Radiator(id, type);
 
 		case AIRCONDITION:
-			// a voir
-			return new Radiator(id,type);
-			
+			// a voir (unused in user actions)
+			return new Radiator(id, type);
+
 		case LIGHTCONTROL:
-			return new BooleanActuator(id,type,"OFF","ON");
-			
-		case WINDOWCLOSER:
-			return new BooleanActuator(id,type,"Closed","Opened");
+			return new BooleanActuator(id, type, "OFF", "ON");
+
+		case FLAPCLOSER:
+			// a voir si boolean
+			return new BooleanActuator(id, type, "OFF", "ON");
+
+		case HUMIDITYCONTROL:
+			//TODO
+			break;
+
+		case WINDOWCLOSER_1:
+			return new BooleanActuator(id, type, "Closed", "Opened");
+
+		case WINDOWCLOSER_2:
+			return new BooleanActuator(id, type, "Closed", "Opened");
 		}
 		throw new DeepHouseFormatException("Unknown Actuator type");
 	}

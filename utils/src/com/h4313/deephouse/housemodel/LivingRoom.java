@@ -13,6 +13,10 @@ public class LivingRoom extends Room implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public LivingRoom(){
+		super();
+	}
+	
 	public LivingRoom(int id) {
 		super(id);
 	}

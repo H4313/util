@@ -10,5 +10,11 @@ public abstract class RoomConstants {
 	public static final int ID_BEDROOM = 3;
 	public static final int ID_OFFICE = 4;
 	public static final int ID_CORRIDOR = 5;
-
+	
+	public static final String tempAction = "Temperature";
+	public static final String humAction = "Humidity";
+	public static final String lightAction = "Light";
+	public static final String wind1Action = "Window1";
+	public static final String wind2Action = "Window2";
+	public static final String flapAction = "Flap"; //Volet
 }

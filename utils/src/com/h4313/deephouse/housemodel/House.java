@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CollectionOfElements;
 import org.json.JSONObject;
@@ -26,10 +27,9 @@ public class House implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static volatile House instance = null;	
-	
-	protected List<Room> rooms;
+	private static volatile House instance = null;
 
+	protected List<Room> rooms;
 
 	protected int idHouse;
 
@@ -42,81 +42,20 @@ public class House implements Serializable {
 	}
 
 	/**
-     * Méthode permettant de renvoyer une instance de la classe Singleton
-     * @return Retourne l'instance du singleton.
-     */
-    public final static House getInstance() {
-        if (House.instance == null) {
-           synchronized(House.class) {
-             if (House.instance == null) {
-            	 House.instance = new House();
-             }
-           }
-        }
-        return House.instance;
-    }
-
-//	/**
-//	 * JSON Structure
-//	 * 
-//	 * �piece� : �numPiece�, �capteur� : �idCapteur�, �type � : �typeCapteur�
-//	 * */
-//	public void addSensor(JSONObject json) throws DeepHouseException {
-//		Object roomType, sensorType;
-//		String idSensor;
-//		try {
-//			roomType = json.get("piece");
-//			idSensor = json.getString("capteur");
-//			sensorType = json.get("type");
-//		} catch (Exception e) {
-//			throw new DeepHouseFormatException("MalFormed JSON "
-//					+ e.getMessage());
-//		}
-//		if (roomType instanceof RoomType && sensorType instanceof SensorType) {
-//			Room r = this.getOrAddRoom((RoomType) roomType);
-//			r.sensors.addSensor(idSensor, (SensorType) sensorType);
-//		} else {
-//			throw new DeepHouseFormatException(
-//					"MalFormed JSON : unknown room or sensor type");
-//		}
-//	}
-//
-//	/**
-//	 * If the room exists => get room
-//	 * 
-//	 * if not => create room
-//	 * */
-//	public Room getOrAddRoom(RoomType type) throws DeepHouseException {
-//		for (Room r : rooms) {
-//			if (r.idRoom == type.getId()) {
-//				return r;
-//			}
-//		}
-//		Room newRoom = RoomFactory.createInstance(type);
-//		this.rooms.add(newRoom);
-//		return newRoom;
-//	}
-//	
-//	
-//	public Sensor updateSensor(Frame frame) throws DeepHouseException {
-//		for(Room r : rooms) {
-//			if(r.sensors.containsValue(frame.getId())) {
-//				r.sensors.updateSensor(frame);
-//				return r.sensors.get(frame.getId());
-//			}
-//		}
-//		return null;
-//	}
-//	
-//	public Actuator updateActuator(Frame frame) throws DeepHouseException {
-//		for(Room r : rooms) {
-//			if(r.actuators.containsValue(frame.getId())) {
-//				r.actuators.updateActuator(frame);
-//				return r.actuators.get(frame.getId());
-//			}
-//		}
-//		return null;
-//	}
+	 * Méthode permettant de renvoyer une instance de la classe Singleton
+	 * 
+	 * @return Retourne l'instance du singleton.
+	 */
+	public final static House getInstance() {
+		if (House.instance == null) {
+			synchronized (House.class) {
+				if (House.instance == null) {
+					House.instance = new House();
+				}
+			}
+		}
+		return House.instance;
+	}
 
 	/**
 	 * JSON Structure
@@ -144,24 +83,48 @@ public class House implements Serializable {
 		}
 	}
 
-	@CollectionOfElements// @Column(name = "rooms", nullable = true)
+	/**
+	 * JSONObject:
+	 * 
+	 * "piece" : idPiece
+	 * "typeAction" : string (see RoomConstants
+	 * "valeur" : valeurCapteur= string
+	 * */
+	public void userAction(JSONObject json) throws DeepHouseException{
+		try {
+			int roomId = json.getInt("piece");
+			String typeAction = json.getString("typeAction");
+			String value = json.getString("valeur");
+			
+			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
+				throw new DeepHouseFormatException("Unknown room id : " +roomId);
+			}
+			Room r = rooms.get(roomId);
+			r.userAction(typeAction, value);
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("MalFormed JSON : "
+					+ e.getMessage());
+		}
+	}
+
+	@OneToMany
 	public List<Room> getRooms() {
 		return rooms;
 	}
 
 	public Sensor updateSensor(Frame frame) throws DeepHouseException {
-		for(Room r : rooms) {
-			if(r.sensors.containsValue(frame.getId())) {
+		for (Room r : rooms) {
+			if (r.sensors.containsValue(frame.getId())) {
 				r.sensors.updateSensor(frame);
 				return r.sensors.get(frame.getId());
 			}
 		}
 		return null;
 	}
-	
+
 	public Actuator updateActuator(Frame frame) throws DeepHouseException {
-		for(Room r : rooms) {
-			if(r.actuators.containsValue(frame.getId())) {
+		for (Room r : rooms) {
+			if (r.actuators.containsValue(frame.getId())) {
 				r.actuators.updateActuator(frame);
 				return r.actuators.get(frame.getId());
 			}
@@ -169,12 +132,9 @@ public class House implements Serializable {
 		return null;
 	}
 
-	
-	
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
-
 
 	@Id
 	@Column(name = "idhouse", nullable = false)

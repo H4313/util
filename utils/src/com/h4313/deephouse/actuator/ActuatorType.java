@@ -1,10 +1,14 @@
 package com.h4313.deephouse.actuator;
 
 public enum ActuatorType {
+	//all actuators are virtual??
 	RADIATOR(false,"B55A1005","Radiator"),
 	LIGHTCONTROL(false,"B55A0005","Light control"),
+	HUMIDITYCONTROL(false,"00000000","Humidity control"),
 	AIRCONDITION(false,"B55A1105","Air conditioner"),
-	WINDOWCLOSER(false,"B55A0105","Window closer");
+	WINDOWCLOSER_1(false,"B55A0105","Window closer _1 "),
+	WINDOWCLOSER_2(false,"B55A0105","Window closer _2"),
+	FLAPCLOSER(false,"00000000","Flap closer");;
 	
 	/*
 	 * true if the actuator is a physical one false if it's a virtual one
