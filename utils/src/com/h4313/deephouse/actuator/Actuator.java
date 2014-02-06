@@ -33,6 +33,8 @@ public abstract class Actuator {
 	public abstract void update(Frame frame) throws DeepHouseException;
 	public abstract void setUserDesiredValue(String value) throws DeepHouseException;
 	
+	public abstract void setValue(Object value);
+	
 	public String toString() {
 		String text = type+" actuator / Value: "+dataString();
 		return text;

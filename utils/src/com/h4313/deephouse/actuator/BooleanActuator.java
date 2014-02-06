@@ -11,7 +11,7 @@ public class BooleanActuator extends Actuator {
 
 	private static final long serialVersionUID = 1L;
 
-	protected boolean lastValue;
+	protected boolean value;
 
 	protected String trueText;
 
@@ -27,7 +27,7 @@ public class BooleanActuator extends Actuator {
 	@Transient
 	protected String getDatas() {
 		String datas = "";
-		if (lastValue) {
+		if (value) {
 			datas += Constant.SENSOR_BOOLEAN_DATAS_TRUE;
 		} else {
 			datas += Constant.SENSOR_BOOLEAN_DATAS_FALSE;
@@ -38,9 +38,9 @@ public class BooleanActuator extends Actuator {
 	@Override
 	public void update(Frame frame) throws DeepHouseException {
 		if (frame.getDataStr().equals(Constant.SENSOR_BOOLEAN_DATAS_TRUE)) {
-			lastValue = true;
+			value = true;
 		} else {
-			lastValue = false;
+			value = false;
 		}
 	}
 
@@ -56,16 +56,16 @@ public class BooleanActuator extends Actuator {
 	}
 
 	public boolean getLastValue() {
-		return lastValue;
+		return value;
 	}
 
-	public void setLastValue(boolean lastValue) {
-		this.lastValue = lastValue;
+	public void setValue(Object value) {
+		this.value = (Boolean) value;
 	}
 
 	@Override
 	protected String dataString() {
-		if (lastValue) {
+		if (value) {
 			return trueText;
 		} else {
 			return falseText;

@@ -60,4 +60,7 @@ public class Radiator extends Actuator {
 		return setValue.toString() + " °C";
 	}
 
+	public void setValue(Object value) {
+		setValue = (Double) value;
+	}
 }
