@@ -33,6 +33,8 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 		this.trueText = truetext;
 	}
 	
+	public BooleanSensor() {
+	}
 	
 	
 	@Transient
