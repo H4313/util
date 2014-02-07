@@ -80,7 +80,7 @@ public class Radiator extends Actuator<Double> {
 		lastValue = value;
 	}
 	
-	@Column
+	@Transient
 	public Double getLastValue() {
 		return lastValue;
 	}

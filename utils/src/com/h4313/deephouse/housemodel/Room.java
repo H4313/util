@@ -40,12 +40,12 @@ public abstract class Room implements Serializable {
 	protected int idRoom;
 
 	protected Map<String,Sensor<Object>> sensors;
-	protected Map<String,Actuator> actuators;
+	protected Map<String,Actuator<Object>> actuators;
 
 	public Room(int id) {
 		this.idRoom = id;
 		this.sensors =  new Hashtable<String, Sensor<Object>>();
-		this.actuators = new Hashtable<String, Actuator>();
+		this.actuators = new Hashtable<String, Actuator<Object>>();
 	}
 
 	public Room() {
@@ -137,11 +137,11 @@ public abstract class Room implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@MapKey(name = "id")
-	public Map<String, Actuator> getActuators() {
+	public Map<String, Actuator<Object>> getActuators() {
 		return actuators;
 	}
 
-	public void setActuators(Map<String, Actuator> actuators) {
+	public void setActuators(Map<String, Actuator<Object>> actuators) {
 		this.actuators = actuators;
 	}
 
