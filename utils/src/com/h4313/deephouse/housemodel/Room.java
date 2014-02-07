@@ -2,6 +2,7 @@ package com.h4313.deephouse.housemodel;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -33,8 +34,8 @@ public abstract class Room implements Serializable {
 
 	public Room(int id) {
 		this.idRoom = id;
-		this.sensors =  new HashMap<String, Sensor<Object>>();
-		this.actuators = new HashMap<String, Actuator>();
+		this.sensors =  new Hashtable<String, Sensor<Object>>();
+		this.actuators = new Hashtable<String, Actuator>();
 	}
 
 	public Room() {

@@ -2,6 +2,7 @@ package com.h4313.deephouse.actuator;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ public abstract class Actuator implements Serializable {
 
 	public Actuator(String id, ActuatorType type) {
 		this.id = id;
-		sensors =  new HashMap<String, Sensor<Object>>();
+		sensors =  new Hashtable<String, Sensor<Object>>();
 		this.modified = false;
 	}
 	public Actuator() {
