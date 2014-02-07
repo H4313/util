@@ -55,6 +55,7 @@ public abstract class Actuator<T>  implements Serializable {
 	public abstract void update(Frame frame) throws DeepHouseException;
 	public abstract void setUserDesiredValue(String value) throws DeepHouseException;
 	
+	@Column
 	public abstract T getLastValue();
 
 	public abstract void setLastValue(T o);

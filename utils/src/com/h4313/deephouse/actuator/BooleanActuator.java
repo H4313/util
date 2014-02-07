@@ -55,7 +55,8 @@ public class BooleanActuator extends Actuator<Boolean> {
 			throw new DeepHouseFormatException("Format exception: " + value);
 		}
 	}
-
+	
+	@Transient
 	public Boolean getLastValue() {
 		return lastValue;
 	}

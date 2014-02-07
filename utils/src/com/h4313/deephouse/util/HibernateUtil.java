@@ -12,6 +12,7 @@ import com.h4313.deephouse.housemodel.Kitchen;
 import com.h4313.deephouse.housemodel.LivingRoom;
 import com.h4313.deephouse.housemodel.Room;
 import com.h4313.deephouse.sensor.*;
+import com.h4313.deephouse.actuator.*;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
@@ -21,6 +22,10 @@ public class HibernateUtil {
 			sessionFactory = new AnnotationConfiguration()
 			.addPackage("com.h4313.deephouse.sensor") // le nom complet du package
 			.addAnnotatedClass(BooleanSensor.class)
+			.addAnnotatedClass(TemperatureSensor.class)
+			.addPackage("com.h4313.deephouse.actuator") // le nom complet du package
+			.addAnnotatedClass(Radiator.class)
+			.addAnnotatedClass(BooleanActuator.class)
 			.addPackage("com.h4313.deephouse.housemodel") // le nom complet du package
 			.addAnnotatedClass(House.class)
 			.addAnnotatedClass(Room.class)

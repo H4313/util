@@ -55,7 +55,7 @@ public abstract class Room implements Serializable {
 
 
 	@SuppressWarnings("unchecked")
-	public void userAction(String action, String value)
+	public void userAction(String action, String value,String actuatorId)
 			throws DeepHouseException {
 
 		ArrayList<Actuator<Object>> list;
@@ -65,12 +65,10 @@ public abstract class Room implements Serializable {
 			list = getActuatorByType(ActuatorType.HUMIDITYCONTROL);
 		} else if (RoomConstants.lightAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
-		} else if (RoomConstants.wind1Action.equals(action)) {
-			list = getActuatorByType(ActuatorType.WINDOWCLOSER_1);
-		} else if (RoomConstants.wind2Action.equals(action)) {
-			list = getActuatorByType(ActuatorType.WINDOWCLOSER_2);
+		} else if (RoomConstants.windAction.equals(action)) {
+			list = getActuatorById(actuatorId);
 		} else if (RoomConstants.flapAction.equals(action)) {
-			list = getActuatorByType(ActuatorType.FLAPCLOSER);
+			list = getActuatorById(actuatorId);
 		} else {
 			throw new DeepHouseFormatException("Unknown action type : " +action);
 		}
@@ -174,6 +172,16 @@ public abstract class Room implements Serializable {
 		return list;
 	}
 
+	public ArrayList<Actuator<Object>> getActuatorById(String id) {
+		ArrayList<Actuator<Object>> list = new ArrayList<Actuator<Object>>();
+        Set<Map.Entry<String, Actuator<Object>>> set = actuators.entrySet();
+        for(Map.Entry<String,Actuator<Object>> entry : set) {
+        	if(entry.getValue().getType().equals(id)) {
+        		list.add(entry.getValue());
+        	}
+        }
+		return list;
+	}
 
 	
 

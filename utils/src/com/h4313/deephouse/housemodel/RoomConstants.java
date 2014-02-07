@@ -14,7 +14,6 @@ public abstract class RoomConstants {
 	public static final String tempAction = "Temperature";
 	public static final String humAction = "Humidity";
 	public static final String lightAction = "Light";
-	public static final String wind1Action = "Window1";
-	public static final String wind2Action = "Window2";
+	public static final String windAction = "Window";
 	public static final String flapAction = "Flap"; //Volet
 }
