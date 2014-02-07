@@ -39,8 +39,12 @@ public class House implements Serializable {
 		}
 	}
 	
-	public House() {
-		}
+	/**
+	 * Ne pas utiliser !!! Uniquement pour Hibernate
+	 */
+	public House() 
+	{
+	}
 
 	/**
 	 * Méthode permettant de renvoyer une instance de la classe Singleton
@@ -50,7 +54,7 @@ public class House implements Serializable {
 		if (House.instance == null) {
 			synchronized (House.class) {
 				if (House.instance == null) {
-					House.instance = new House();
+					House.instance = new House(0);
 				}
 			}
 		}
