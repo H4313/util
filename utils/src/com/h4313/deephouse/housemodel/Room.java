@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,12 +41,12 @@ public abstract class Room implements Serializable {
 	protected int idRoom;
 
 	protected Map<String,Sensor<Object>> sensors;
-	protected Map<String,Actuator> actuators;
+	protected Map<String,Actuator<Object>> actuators;
 
 	public Room(int id) {
 		this.idRoom = id;
 		this.sensors =  new Hashtable<String, Sensor<Object>>();
-		this.actuators = new Hashtable<String, Actuator>();
+		this.actuators = new Hashtable<String, Actuator<Object>>();
 	}
 
 	public Room() {
@@ -57,26 +58,26 @@ public abstract class Room implements Serializable {
 	public void userAction(String action, String value)
 			throws DeepHouseException {
 
-//		ArrayList<Actuator<Object>> list;
-//		if (RoomConstants.tempAction.equals(action)) {
-//			list = actuators.getByType(ActuatorType.RADIATOR);
-//		} else if (RoomConstants.humAction.equals(action)) {
-//			list = actuators.getByType(ActuatorType.HUMIDITYCONTROL);
-//		} else if (RoomConstants.lightAction.equals(action)) {
-//			list = actuators.getByType(ActuatorType.LIGHTCONTROL);
-//		} else if (RoomConstants.wind1Action.equals(action)) {
-//			list = actuators.getByType(ActuatorType.WINDOWCLOSER_1);
-//		} else if (RoomConstants.wind2Action.equals(action)) {
-//			list = actuators.getByType(ActuatorType.WINDOWCLOSER_2);
-//		} else if (RoomConstants.flapAction.equals(action)) {
-//			list = actuators.getByType(ActuatorType.FLAPCLOSER);
-//		} else {
-//			throw new DeepHouseFormatException("Unknown action type : " +action);
-//		}
-//		
-//		for(Actuator act : list){
-//			act.setUserDesiredValue(value);
-//		}
+		ArrayList<Actuator<Object>> list;
+		if (RoomConstants.tempAction.equals(action)) {
+			list = getActuatorByType(ActuatorType.RADIATOR);
+		} else if (RoomConstants.humAction.equals(action)) {
+			list = getActuatorByType(ActuatorType.HUMIDITYCONTROL);
+		} else if (RoomConstants.lightAction.equals(action)) {
+			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
+		} else if (RoomConstants.wind1Action.equals(action)) {
+			list = getActuatorByType(ActuatorType.WINDOWCLOSER_1);
+		} else if (RoomConstants.wind2Action.equals(action)) {
+			list = getActuatorByType(ActuatorType.WINDOWCLOSER_2);
+		} else if (RoomConstants.flapAction.equals(action)) {
+			list = getActuatorByType(ActuatorType.FLAPCLOSER);
+		} else {
+			throw new DeepHouseFormatException("Unknown action type : " +action);
+		}
+		
+		for(Actuator act : list){
+			act.setUserDesiredValue(value);
+		}
 	}
 
 	public void addSensor(String id, SensorType type) throws DeepHouseException {
@@ -137,11 +138,11 @@ public abstract class Room implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@MapKey(name = "id")
-	public Map<String, Actuator> getActuators() {
+	public Map<String, Actuator<Object>> getActuators() {
 		return actuators;
 	}
 
-	public void setActuators(Map<String, Actuator> actuators) {
+	public void setActuators(Map<String, Actuator<Object>> actuators) {
 		this.actuators = actuators;
 	}
 
@@ -149,18 +150,28 @@ public abstract class Room implements Serializable {
 	 * Retourne la liste des sensors d'un certain type
 	 */
 	public ArrayList<Sensor<Object>> getSensorByType(SensorType type) {
-//		ArrayList<Sensor<Object>> list = new ArrayList<Sensor<Object>>();
-//		Enumeration<Sensor<Object>> e = sensors.elements();
-//		Sensor<Object> a;
-//
-//		while (e.hasMoreElements()) {
-//			a = e.nextElement();
-//			if (a.getType()== type) {
-//				list.add(a);
-//			}
-//		}
-//		return list;
-		return null;
+		ArrayList<Sensor<Object>> list = new ArrayList<Sensor<Object>>();
+        Set<Map.Entry<String, Sensor<Object>>> set = sensors.entrySet();
+        for(Map.Entry<String,Sensor<Object>> entry : set) {
+        	if(entry.getValue().getType() == type) {
+        		list.add(entry.getValue());
+        	}
+        }
+		return list;
+	}
+	
+	/**
+	 * Retourne la liste des actuators d'un certain type
+	 */
+	public ArrayList<Actuator<Object>> getActuatorByType(ActuatorType type) {
+		ArrayList<Actuator<Object>> list = new ArrayList<Actuator<Object>>();
+        Set<Map.Entry<String, Actuator<Object>>> set = actuators.entrySet();
+        for(Map.Entry<String,Actuator<Object>> entry : set) {
+        	if(entry.getValue().getType() == type) {
+        		list.add(entry.getValue());
+        	}
+        }
+		return list;
 	}
 
 
