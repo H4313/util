@@ -42,7 +42,7 @@ public abstract class Room implements Serializable {
 
 	public void userAction(String action, String value)
 			throws DeepHouseException {
-		ArrayList<Actuator> list;
+		ArrayList<Actuator<Object>> list;
 		if (RoomConstants.tempAction.equals(action)) {
 			list = actuators.getByType(ActuatorType.RADIATOR);
 		} else if (RoomConstants.humAction.equals(action)) {

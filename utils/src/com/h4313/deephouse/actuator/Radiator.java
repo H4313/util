@@ -6,9 +6,9 @@ import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 import com.h4313.deephouse.util.DecToHexConverter;
 
-public class Radiator extends Actuator {
+public class Radiator extends Actuator<Double> {
 
-	protected Double setValue;
+	protected Double lastValue;
 
 	public Radiator(String id, ActuatorType type) {
 		super(id, type);
@@ -23,7 +23,7 @@ public class Radiator extends Actuator {
 		}
 
 		int value = (int) Math
-				.floor(setValue
+				.floor(lastValue
 						* Math.pow(2, 8 * Constant.SENSOR_TEMPERATURE_BYTES)
 						/ (Constant.SENSOR_TEMPERATURE_MAX - Constant.SENSOR_TEMPERATURE_MIN)
 						+ Constant.SENSOR_TEMPERATURE_MIN);
@@ -41,7 +41,7 @@ public class Radiator extends Actuator {
 		Double temp = (value - Constant.SENSOR_TEMPERATURE_MIN)
 				* (Constant.SENSOR_TEMPERATURE_MAX - Constant.SENSOR_TEMPERATURE_MIN)
 				/ Math.pow(2, 8 * Constant.SENSOR_TEMPERATURE_BYTES);
-		this.setValue = temp;
+		this.lastValue = temp;
 	}
 
 	@Override
@@ -57,10 +57,14 @@ public class Radiator extends Actuator {
 
 	@Override
 	protected String dataString() {
-		return setValue.toString() + " °C";
+		return lastValue.toString() + " °C";
 	}
 
-	public void setValue(Object value) {
-		setValue = (Double) value;
+	public void setLastValue(Double value) {
+		lastValue = value;
+	}
+	
+	public Double getLastValue() {
+		return lastValue;
 	}
 }

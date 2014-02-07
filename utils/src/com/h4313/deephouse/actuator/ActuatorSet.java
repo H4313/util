@@ -9,7 +9,7 @@ import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseNotFoundException;
 import com.h4313.deephouse.frame.Frame;
 
-public class ActuatorSet extends Hashtable<String, Actuator> {
+public class ActuatorSet extends Hashtable<String, Actuator<Object>> {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class ActuatorSet extends Hashtable<String, Actuator> {
 	}
 
 	public void updateActuator(Frame frame) throws DeepHouseException {
-		Actuator actuator = this.get(frame.getId());
+		Actuator<Object> actuator = this.get(frame.getId());
 		if (actuator == null) {
 			throw new DeepHouseNotFoundException("Id " + frame.getId()
 					+ "not found");
@@ -37,10 +37,10 @@ public class ActuatorSet extends Hashtable<String, Actuator> {
 		actuator.update(frame);
 	}
 
-	public ArrayList<Actuator> getByType(ActuatorType type) {
-		ArrayList<Actuator> list = new ArrayList<Actuator>();
-		Enumeration<Actuator> e = this.elements();
-		Actuator a;
+	public ArrayList<Actuator<Object>> getByType(ActuatorType type) {
+		ArrayList<Actuator<Object>> list = new ArrayList<Actuator<Object>>();
+		Enumeration<Actuator<Object>> e = this.elements();
+		Actuator<Object> a;
 
 		while (e.hasMoreElements()) {
 			a = e.nextElement();
