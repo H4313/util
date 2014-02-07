@@ -117,7 +117,7 @@ public class House implements Serializable {
 
 	public Sensor<Object> updateSensor(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
-			if(r.sensors.containsValue(frame.getId())) {
+			if(r.sensors.containsKey(frame.getId())) {
 				r.updateSensor(frame);
 				return r.sensors.get(frame.getId());
 			}
@@ -126,9 +126,8 @@ public class House implements Serializable {
 	}
 
 	public Actuator updateActuator(Frame frame) throws DeepHouseException {
-
 		for(Room r : rooms) {
-			if(r.actuators.containsValue(frame.getId())) {
+			if(r.actuators.containsKey(frame.getId())) {
 				r.updateActuator(frame);
 				return r.actuators.get(frame.getId());
 			}

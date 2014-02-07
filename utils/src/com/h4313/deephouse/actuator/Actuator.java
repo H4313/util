@@ -32,6 +32,7 @@ public abstract class Actuator<T>  implements Serializable {
 
 	public Actuator(String id, ActuatorType type) {
 		this.id = id;
+		this.type = type;
 		sensors =  new Hashtable<String, Sensor<Object>>();
 		this.modified = false;
 	}

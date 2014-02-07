@@ -73,7 +73,10 @@ public class Radiator extends Actuator<Double> {
 
 	@Override
 	protected String dataString() {
-		return lastValue.toString() + " °C";
+		if(lastValue != null) {
+			return lastValue.toString() + " °C";	
+		}
+		return "No value";
 	}
 
 	public void setLastValue(Double value) {
