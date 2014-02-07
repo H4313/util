@@ -8,11 +8,11 @@ import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 
-public class BooleanActuator extends Actuator {
+public class BooleanActuator extends Actuator<Boolean> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected boolean value;
+	protected boolean lastValue;
 
 	protected String trueText;
 
@@ -28,7 +28,7 @@ public class BooleanActuator extends Actuator {
 	@Transient
 	protected String getDatas() {
 		String datas = "";
-		if (value) {
+		if (lastValue) {
 			datas += Constant.SENSOR_BOOLEAN_DATAS_TRUE;
 		} else {
 			datas += Constant.SENSOR_BOOLEAN_DATAS_FALSE;
@@ -39,9 +39,9 @@ public class BooleanActuator extends Actuator {
 	@Override
 	public void update(Frame frame) throws DeepHouseException {
 		if (frame.getDataStr().equals(Constant.SENSOR_BOOLEAN_DATAS_TRUE)) {
-			value = true;
+			lastValue = true;
 		} else {
-			value = false;
+			lastValue = false;
 		}
 	}
 
@@ -56,17 +56,17 @@ public class BooleanActuator extends Actuator {
 		}
 	}
 
-	public boolean getLastValue() {
-		return value;
+	public Boolean getLastValue() {
+		return lastValue;
 	}
 
-	public void setValue(Object value) {
-		this.value = (Boolean) value;
+	public void setLastValue(Boolean value) {
+		this.lastValue = value;
 	}
 
 	@Override
 	protected String dataString() {
-		if (value) {
+		if (lastValue) {
 			return trueText;
 		} else {
 			return falseText;

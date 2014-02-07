@@ -20,12 +20,9 @@ import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.util.Constant;
 
+
 @Entity
-public abstract class Actuator implements Serializable {
-	
-	/**
-	 * 
-	 */
+public abstract class Actuator<T>  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected ActuatorType type;
@@ -58,7 +55,9 @@ public abstract class Actuator implements Serializable {
 	public abstract void update(Frame frame) throws DeepHouseException;
 	public abstract void setUserDesiredValue(String value) throws DeepHouseException;
 	
-	public abstract void setValue(Object value);
+	public abstract T getLastValue();
+
+	public abstract void setLastValue(T o);
 	
 	public String toString() {
 		String text = type+" actuator / Value: "+dataString();
