@@ -1,7 +1,6 @@
 package com.h4313.deephouse.actuator;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -26,7 +25,6 @@ public abstract class Actuator<T>  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected ActuatorType type;
-	// todo : maybe a list (synchronized)
 	protected  Map<String,Sensor<Object>> sensors;
 	protected boolean modified;
 
