@@ -95,12 +95,13 @@ public class House implements Serializable {
 //			int roomId = json.getInt("piece");
 //			String typeAction = json.getString("typeAction");
 //			String value = json.getString("valeur");
+//			String actuatorId = json.getString("actuator");
 //			
 //			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
 //				throw new DeepHouseFormatException("Unknown room id : " +roomId);
 //			}
 //			Room r = rooms.get(roomId);
-//			r.userAction(typeAction, value);
+//			r.userAction(typeAction, value, actuatorId);
 //		} catch (Exception e) {
 //			throw new DeepHouseFormatException("MalFormed JSON : "
 //					+ e.getMessage());

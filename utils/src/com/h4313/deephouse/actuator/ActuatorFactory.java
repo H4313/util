@@ -26,11 +26,9 @@ public class ActuatorFactory {
 			//TODO
 			break;
 
-		case WINDOWCLOSER_1:
+		case WINDOWCLOSER:
 			return new BooleanActuator(id, type, "Closed", "Opened");
 
-		case WINDOWCLOSER_2:
-			return new BooleanActuator(id, type, "Closed", "Opened");
 		}
 		throw new DeepHouseFormatException("Unknown Actuator type");
 	}
