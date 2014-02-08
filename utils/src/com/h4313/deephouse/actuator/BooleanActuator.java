@@ -13,6 +13,8 @@ public class BooleanActuator extends Actuator<Boolean> {
 	private static final long serialVersionUID = 1L;
 
 	protected boolean lastValue;
+	
+	protected boolean desiredValue;
 
 	protected String trueText;
 
@@ -46,14 +48,19 @@ public class BooleanActuator extends Actuator<Boolean> {
 	}
 
 	@Override
-	public void setUserDesiredValue(String value) throws DeepHouseException {
+	public void setDesiredValue(Boolean value) throws DeepHouseException {
 		try {
-			Boolean desiredValue = Boolean.parseBoolean(value);
+			desiredValue = value;
 
 			// TODO
 		} catch (Exception e) {
 			throw new DeepHouseFormatException("Format exception: " + value);
 		}
+	}
+	
+	@Override
+	public Boolean getDesiredValue() {
+		return this.desiredValue;
 	}
 	
 	@Transient

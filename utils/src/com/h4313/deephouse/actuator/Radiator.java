@@ -16,7 +16,10 @@ import com.h4313.deephouse.util.DecToHexConverter;
 public class Radiator extends Actuator<Double> {
 
 	private static final long serialVersionUID = 1L;
+	
 	protected Double lastValue;
+	
+	protected Double desiredValue;
 
 	public Radiator(String id, ActuatorType type) {
 		super(id, type);
@@ -54,22 +57,19 @@ public class Radiator extends Actuator<Double> {
 	}
 
 	@Override
-	public void setUserDesiredValue(String value) throws DeepHouseException {
+	public void setDesiredValue(Double value) throws DeepHouseException {
 		try {
-			Double desiredValue = Double.valueOf(value);
-			
+			desiredValue = value;
 			// TODO 
 		} catch (Exception e) {
 			throw new DeepHouseFormatException("Format exception: " + value);
 		}
 	}
-
-
 	
-
-	
-	
-
+	@Override
+	public Double getDesiredValue() {
+		return this.desiredValue;
+	}
 
 	@Override
 	protected String dataString() {

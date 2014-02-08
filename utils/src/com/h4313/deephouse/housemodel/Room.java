@@ -69,7 +69,7 @@ public abstract class Room implements Serializable {
 		}
 
 		for (Actuator act : list) {
-			act.setUserDesiredValue(value);
+			act.setDesiredValue(value);
 		}
 	}
 
