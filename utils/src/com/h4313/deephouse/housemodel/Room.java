@@ -1,6 +1,8 @@
 package com.h4313.deephouse.housemodel;
 
 import java.io.Serializable;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import com.h4313.deephouse.sensor.*;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
+import com.h4313.deephouse.util.Tool;
 
 @Entity
 public abstract class Room implements Serializable {
@@ -55,8 +58,8 @@ public abstract class Room implements Serializable {
 		ArrayList<Actuator<Object>> list;
 		if (RoomConstants.tempAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.RADIATOR);
-		} else if (RoomConstants.humAction.equals(action)) {
-			list = getActuatorByType(ActuatorType.HUMIDITYCONTROL);
+			// } else if (RoomConstants.humAction.equals(action)) {
+			// list = getActuatorByType(ActuatorType.HUMIDITYCONTROL);
 		} else if (RoomConstants.lightAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
 		} else if (RoomConstants.windAction.equals(action)) {
@@ -106,22 +109,84 @@ public abstract class Room implements Serializable {
 		// this.addSensor(id, type);
 	}
 
-	public void connectSensorActuator(String sensorId, String actuatorId)throws DeepHouseException {
+	public void connectSensorActuator(String sensorId, String actuatorId)
+			throws DeepHouseException {
 		Sensor<Object> s = this.sensors.get(sensorId);
-		if(s == null){
-			throw new DeepHouseNotFoundException("Inexistent sensor : "+sensorId);
+		if (s == null) {
+			throw new DeepHouseNotFoundException("Inexistent sensor : "
+					+ sensorId);
 		}
 		Actuator<Object> act = this.actuators.get(actuatorId);
-		if(act == null){
-			throw new DeepHouseNotFoundException("Inexistent actuator : " + actuatorId);
+		if (act == null) {
+			throw new DeepHouseNotFoundException("Inexistent actuator : "
+					+ actuatorId);
 		}
-		
+		if (!Tool.testTypeConnectivity(s.getType(), act.getType())) {
+			throw new DeepHouseNotFoundException(
+					"Incompatible sensor - actuator types : " + act.getType()
+							+ "-" + s.getType());
+		}
+		this.connectSensorActuator(s, act);
+	}
+
+	public void connectSensorActuator(Sensor<Object> s, Actuator<Object> act) {
 		if (!s.getActuators().containsValue(act)) {
 			s.getActuators().put(act.getId(), act);
 		}
 		if (!act.getSensors().containsValue(s)) {
 			act.getSensors().put(s.getId(), s);
 		}
+	}
+
+	/*
+	 * establish logical connections between Sensors and Actuators - uses the
+	 * rooms lists of sensors and actuators
+	 */
+	public void establishConnections() throws DeepHouseException {
+		Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
+				.elements();
+		Enumeration<Sensor<Object>> eS;
+		Actuator<Object> act;
+		Sensor<Object> s;
+
+		while (eActuators.hasMoreElements()) {
+			act = eActuators.nextElement();
+			eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
+			while (eS.hasMoreElements()) {
+				s = eS.nextElement();
+				if (Tool.testTypeConnectivity(s.getType(), act.getType())) {
+					this.connectSensorActuator(s, act);
+				}
+			}
+		}
+	}
+
+	public void printInformations() {
+		Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
+				.elements();
+		Enumeration<Sensor<Object>> eS;
+		Actuator<Object> act;
+		Sensor<Object> s;
+
+		System.out.println("Room " + this.idRoom + " :");
+		while (eActuators.hasMoreElements()) {
+			act = eActuators.nextElement();
+			System.out.println(act.toString());
+			eS = ((Hashtable<String, Sensor<Object>>) act.getSensors())
+					.elements();
+			while (eS.hasMoreElements()) {
+				s = eS.nextElement();
+				System.out.println("    " + s.toString());
+			}
+		}
+		System.out.println("\nUnconnected sensors");
+		eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
+		while (eS.hasMoreElements()) {
+			s = eS.nextElement();
+			if(s.getActuators().isEmpty())
+				System.out.println(" " + s.toString());
+		}
+		System.out.println();
 	}
 
 	@Id
