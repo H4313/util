@@ -67,6 +67,7 @@ public class Radiator extends Actuator<Double> {
 	}
 	
 	@Override
+	@Column
 	public Double getDesiredValue() {
 		return this.desiredValue;
 	}
@@ -86,6 +87,32 @@ public class Radiator extends Actuator<Double> {
 	@Transient
 	public Double getLastValue() {
 		return lastValue;
+	}
+
+	@Override
+	@Transient
+	public Double getDesiredValuePersist() {
+		return this.desiredValue;
+	}
+
+
+
+	@Override
+	@Transient
+	public Double getLastValuePersist() {
+		return this.lastValue;
+	}
+
+	@Override
+	public void setLastValuePersist(Double lastValuePersist) {
+		this.lastValue=lastValuePersist;
+		
+	}
+
+	@Override
+	public void setDesiredValuePersist(Double desiredValuePersist) {
+		this.desiredValue=desiredValuePersist;
+		
 	}
 
 }

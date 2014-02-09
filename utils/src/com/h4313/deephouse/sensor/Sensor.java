@@ -39,8 +39,13 @@ public abstract class Sensor<T> implements Serializable {
 
 	public abstract void update(Frame frame) throws DeepHouseException;
 	
-	@Column
+	@Transient
 	public abstract T getLastValue();
+	
+	@Column
+	public abstract Double getLastValuePersist();
+	
+	public abstract void setLastValuePersist(Double lastValuePersist);
 
 	public abstract void setLastValue(T o);
 	
@@ -78,6 +83,10 @@ public abstract class Sensor<T> implements Serializable {
 	@MapKey(name = "id")
 	public Map<String, Actuator<Object>> getActuators() {
 		return actuators;
+	}
+
+	public void setActuators(Map<String, Actuator<Object>> actuators) {
+		this.actuators = actuators;
 	}
 	
 

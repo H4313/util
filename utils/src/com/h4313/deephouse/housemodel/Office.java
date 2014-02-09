@@ -1,12 +1,22 @@
 package com.h4313.deephouse.housemodel;
 
-public class Office extends Room {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Office extends Room implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3949824972409480824L;
+	private static final long serialVersionUID = 1L;
 
+	
+	public Office(){
+		super();
+	}
+	
 	public Office(int id) {
 		super(id);
 	}

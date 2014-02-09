@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import com.h4313.deephouse.exceptions.DeepHouseTypeException;
 import com.h4313.deephouse.housemodel.House;
+import com.h4313.deephouse.housemodel.Room;
 
 
 
@@ -37,6 +38,9 @@ public class HouseDAO extends DAO<House> {
 		try {
 			
 			transaction = session.beginTransaction();
+			for(Room r :obj.getRooms()){
+				session.saveOrUpdate(r);
+			}
 			session.saveOrUpdate(obj);
 			transaction.commit();
 			
@@ -55,7 +59,10 @@ public class HouseDAO extends DAO<House> {
 		Transaction transaction = null;
 		try {
 		
-			transaction = session.beginTransaction();		
+			transaction = session.beginTransaction();
+			for(Room r :obj.getRooms()){
+				session.delete(r);
+			}
 			session.delete(obj);
 			transaction.commit();
 			

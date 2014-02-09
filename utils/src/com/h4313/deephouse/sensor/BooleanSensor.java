@@ -105,6 +105,25 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 	public void setTrueText(String trueText) {
 		this.trueText = trueText;
 	}
+
+	@Override
+	@Transient
+	public Double getLastValuePersist() {
+		if(!this.lastValue){
+			return (double) 0;
+		}else{
+			return (double) 1;
+		}
+	}
+	
+	@Override
+	public void setLastValuePersist(Double lastValuePersist){
+		if(lastValuePersist==0){
+			this.lastValue=false;
+		}else{
+			this.lastValue=true;
+		}
+	}
 	
 	
 	

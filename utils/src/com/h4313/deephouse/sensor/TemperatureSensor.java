@@ -73,4 +73,15 @@ public class TemperatureSensor extends Sensor<Double> {
 	protected String dataString() {
 		return this.lastValue.toString();
 	}
+
+	@Override
+	@Transient
+	public Double getLastValuePersist() {
+		
+		return this.lastValue;
+	}
+	@Override
+	public void setLastValuePersist(Double lastValuePersist){
+		this.lastValue=lastValuePersist;	
+	}
 }

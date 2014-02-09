@@ -1,6 +1,8 @@
 
 package com.h4313.deephouse.actuator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
@@ -8,6 +10,7 @@ import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.util.Constant;
 
+@Entity
 public class BooleanActuator extends Actuator<Boolean> {
 
 	private static final long serialVersionUID = 1L;
@@ -19,6 +22,7 @@ public class BooleanActuator extends Actuator<Boolean> {
 	protected String trueText;
 
 	protected String falseText;
+	
 
 	public BooleanActuator(String id, ActuatorType type, String falseText,
 			String trueText) {
@@ -59,11 +63,12 @@ public class BooleanActuator extends Actuator<Boolean> {
 	}
 	
 	@Override
+	@Column
 	public Boolean getDesiredValue() {
 		return this.desiredValue;
 	}
 	
-	@Transient
+	@Column
 	public Boolean getLastValue() {
 		return lastValue;
 	}
@@ -79,6 +84,47 @@ public class BooleanActuator extends Actuator<Boolean> {
 		} else {
 			return falseText;
 		}
+	}
+
+	@Override
+	@Transient
+	public Double getDesiredValuePersist() {
+		
+		if(this.desiredValue){
+			return (double) 1;
+		}else{
+			return (double) 0;
+		}
+	}
+
+	@Override
+	public void setDesiredValuePersist(Double desiredValuePersist) {
+		if(desiredValuePersist==1){
+			this.desiredValue=true;
+		}else{
+			this.desiredValue=false;
+		}
+		
+	}
+
+	@Override
+	@Transient
+	public Double getLastValuePersist() {
+		if(this.lastValue){
+			return (double) 1;
+		}else{
+			return (double) 0;
+		}
+	}
+
+	@Override
+	public void setLastValuePersist(Double lastValuePersist) {
+		if(lastValuePersist==1){
+			this.lastValue=true;
+		}else{
+			this.lastValue=false;
+		}
+		
 	}
 
 }

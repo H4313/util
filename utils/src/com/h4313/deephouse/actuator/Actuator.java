@@ -55,12 +55,21 @@ public abstract class Actuator<T>  implements Serializable {
 	
 	public abstract void setDesiredValue(T value) throws DeepHouseException;
 	
+	@Transient
 	public abstract T getDesiredValue();
 	
 	@Column
+	public abstract Double getDesiredValuePersist();
+	public abstract void setDesiredValuePersist(Double desiredValuePersist);
+	
+	@Transient
 	public abstract T getLastValue();
-
 	public abstract void setLastValue(T o);
+	
+	@Column
+	public abstract Double getLastValuePersist();
+	public abstract void setLastValuePersist(Double lastValuePersist);
+	
 	
 	public String toString() {
 		String text = type+" actuator / Value: "+dataString();
