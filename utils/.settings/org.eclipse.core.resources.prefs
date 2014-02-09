@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/com/h4313/deephouse/housemodel/House.java=UTF-8
+encoding//src/com/h4313/deephouse/vue/GenericModeleVue.java=UTF-8
+encoding//src/com/h4313/deephouse/vue/MainVue.java=UTF-8
+encoding//src/com/h4313/deephouse/vue/ModeleActuator.java=UTF-8
+encoding//src/com/h4313/deephouse/vue/ModeleSensor.java=UTF-8
