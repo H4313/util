@@ -1,12 +1,17 @@
 package com.h4313.deephouse.sensor;
 
 import java.io.Serializable;
+import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
@@ -20,6 +25,7 @@ public abstract class Sensor<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected SensorType type;
+	protected  Map<String,Actuator<Object>> actuators;
 	
 	@Transient
 	public String getFrame() {
@@ -68,6 +74,11 @@ public abstract class Sensor<T> implements Serializable {
 	
 	protected abstract String dataString();
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@MapKey(name = "id")
+	public Map<String, Actuator<Object>> getActuators() {
+		return actuators;
+	}
 	
 
 }

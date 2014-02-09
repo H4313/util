@@ -11,10 +11,6 @@ public class ActuatorFactory {
 		case RADIATOR:
 			return new Radiator(id, type);
 
-		case AIRCONDITION:
-			// a voir (unused in user actions)
-			return new Radiator(id, type);
-
 		case LIGHTCONTROL:
 			return new BooleanActuator(id, type, "OFF", "ON");
 
@@ -22,11 +18,10 @@ public class ActuatorFactory {
 			// a voir si boolean
 			return new BooleanActuator(id, type, "OFF", "ON");
 
-		case HUMIDITYCONTROL:
-			//TODO
-			break;
-
 		case WINDOWCLOSER:
+			return new BooleanActuator(id, type, "Closed", "Opened");
+			
+		case DOORCONTROL:
 			return new BooleanActuator(id, type, "Closed", "Opened");
 
 		}

@@ -18,20 +18,15 @@ public class SensorFactory {
 		case WINDOW:
 			return new BooleanSensor(id, type, "CLOSE", "OPEN");
 
-//		case SMELL:
-//			return new BooleanSensor(id, type, "", "");
-//
-//		case SMOKE:
-//			return new BooleanSensor(id, type, "", "");
-//
-//		case NOISE:
-//			return new BooleanSensor(id, type, "", "");
-//
-//		case HUMIDITY:
-//			return new HumiditySensor(id, type);
-
 		case TEMPERATURE:
 			return new TemperatureSensor(id, type);
+			
+		case DOOR:
+			return new BooleanSensor(id, type, "CLOSE", "OPEN");
+			
+		case FLAP:
+			return new BooleanSensor(id, type, "CLOSE", "OPEN");
+
 		}
 		throw new DeepHouseFormatException("Unknown Sensor type");
 	}
