@@ -40,8 +40,12 @@ public class House implements Serializable {
 		}
 	}
 	
-	public House() {
-		}
+	/**
+	 * Ne pas utiliser !!! Uniquement pour Hibernate
+	 */
+	public House() 
+	{
+	}
 
 	/**
 	 * Méthode permettant de renvoyer une instance de la classe Singleton
@@ -84,38 +88,39 @@ public class House implements Serializable {
 //		}
 //	}
 
-	/**
-	 * JSONObject:
-	 * 
-	 * "piece" : idPiece
-	 * "typeAction" : string (see RoomConstants
-	 * "valeur" : valeurCapteur= string
-	 * */
-	@Transient
-	public void userAction(JSONObject json) throws DeepHouseException{
-		try {
-			int roomId = json.getInt("piece");
-			String typeAction = json.getString("typeAction");
-			String value = json.getString("valeur");
-			
-			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
-				throw new DeepHouseFormatException("Unknown room id : " +roomId);
-			}
-			Room r = rooms.get(roomId);
-			r.userAction(typeAction, value);
-		} catch (Exception e) {
-			throw new DeepHouseFormatException("MalFormed JSON : "
-					+ e.getMessage());
-		}
-	}
+
+//	/**
+//	 * JSONObject:
+//	 * 
+//	 * "piece" : idPiece
+//	 * "typeAction" : string (see RoomConstants
+//	 * "valeur" : valeurCapteur= string
+//	 * */
+//	public void userAction(JSONObject json) throws DeepHouseException{
+//		try {
+//			int roomId = json.getInt("piece");
+//			String typeAction = json.getString("typeAction");
+//			String value = json.getString("valeur");
+//			String actuatorId = json.getString("actuator");
+//			
+//			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
+//				throw new DeepHouseFormatException("Unknown room id : " +roomId);
+//			}
+//			Room r = rooms.get(roomId);
+//			r.userAction(typeAction, value, actuatorId);
+//		} catch (Exception e) {
+//			throw new DeepHouseFormatException("MalFormed JSON : "
+//					+ e.getMessage());
+//		}
+//	}
 
 
 
 
 	public Sensor<Object> updateSensor(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
-			if(r.sensors.containsValue(frame.getId())) {
-//				r.sensors.updateSensor(frame);
+			if(r.sensors.containsKey(frame.getId())) {
+				r.updateSensor(frame);
 				return r.sensors.get(frame.getId());
 			}
 		}
@@ -123,12 +128,9 @@ public class House implements Serializable {
 	}
 
 	public Actuator updateActuator(Frame frame) throws DeepHouseException {
-
 		for(Room r : rooms) {
-			if(r.actuators.containsValue(frame.getId())) {
+			if(r.actuators.containsKey(frame.getId())) {
 				r.updateActuator(frame);
-
-
 				return r.actuators.get(frame.getId());
 			}
 		}

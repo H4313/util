@@ -6,8 +6,7 @@ public enum ActuatorType {
 	LIGHTCONTROL(false,"B55A0005","Light control"),
 	HUMIDITYCONTROL(false,"00000000","Humidity control"),
 	AIRCONDITION(false,"B55A1105","Air conditioner"),
-	WINDOWCLOSER_1(false,"B55A0105","Window closer _1 "),
-	WINDOWCLOSER_2(false,"B55A0105","Window closer _2"),
+	WINDOWCLOSER(false,"B55A0105","Window closer"),
 	FLAPCLOSER(false,"00000000","Flap closer");;
 	
 	/*
