@@ -3,6 +3,8 @@ package com.h4313.deephouse.housemodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
+import com.h4313.deephouse.sensor.SensorType;
 
 @Entity
 public class House implements Serializable {
@@ -127,7 +130,48 @@ public class House implements Serializable {
 		return null;
 	}
 
-	public Actuator updateActuator(Frame frame) throws DeepHouseException {
+	public boolean updateSensor(SensorType sensorType, Object value) {
+		boolean found = false;
+		for(Room r : rooms) {
+			Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors().entrySet();
+
+			for(Map.Entry<String, Sensor<Object>> entry : set)
+			{
+				Sensor<Object> sensor = entry.getValue();
+				
+				if(sensor.getType().equals(sensorType))
+				{
+					sensor.setLastValue(value);
+					found = true;
+				}
+			}
+		}
+		return found;
+	}
+	
+	public boolean updateSensor(int idRoom, SensorType sensorType, Object value) {
+		boolean found = false;
+		for(Room r : rooms) {
+			if(r.getIdRoom() == idRoom)
+			{
+				Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors().entrySet();
+
+				for(Map.Entry<String, Sensor<Object>> entry : set)
+				{
+					Sensor<Object> sensor = entry.getValue();
+					
+					if(sensor.getType().equals(sensorType))
+					{
+						sensor.setLastValue(value);
+						found = true;
+					}
+				}
+			}
+		}
+		return found;
+	}
+
+	public Actuator<Object> updateActuator(Frame frame) throws DeepHouseException {
 		for(Room r : rooms) {
 			if(r.actuators.containsKey(frame.getId())) {
 				r.updateActuator(frame);
