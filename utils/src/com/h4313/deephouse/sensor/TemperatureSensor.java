@@ -2,7 +2,6 @@ package com.h4313.deephouse.sensor;
 
 import java.util.Hashtable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
