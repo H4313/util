@@ -36,9 +36,14 @@ public abstract class Actuator<T>  implements Serializable {
 	}
 	public Actuator() {
 	}
+	
+	/************** Getters and Setters ****************/
+	//TODO apres discuter la diff setDesiredValue et setDesiredValuePersist??
+	
+	/************** Methods (if there are no params, cannot start with get) ****************/
 
 	@Transient
-	public String getFrame() {
+	public String composeFrame() {
 		String frame = "";
 		// TODO ecriture des trames
 		frame += type.getTypeFrame();

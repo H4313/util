@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import org.json.JSONObject;
 
 import com.h4313.deephouse.actuator.Actuator;
+import com.h4313.deephouse.actuator.ActuatorType;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
@@ -41,16 +42,16 @@ public class House implements Serializable {
 			rooms.add(RoomFactory.createInstance(i));
 		}
 	}
-	
+
 	/**
 	 * Ne pas utiliser !!! Uniquement pour Hibernate
 	 */
-	public House() 
-	{
+	public House() {
 	}
 
 	/**
 	 * Méthode permettant de renvoyer une instance de la classe Singleton
+	 * 
 	 * @return Retourne l'instance du singleton.
 	 */
 	public final static House getInstance() {
@@ -64,6 +65,25 @@ public class House implements Serializable {
 		return House.instance;
 	}
 
+	/************** Getters and Setters ****************/
+
+	@Id
+	@Column(name = "idhouse", nullable = false)
+	public int getIdHouse() {
+		return idHouse;
+	}
+
+	public void setIdHouse(int idHouse) {
+		this.idHouse = idHouse;
+	}
+	
+	@OneToMany
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	/************** Methods (if there are no params, cannot start with get) ****************/
+	
 	/**
 	 * JSON Structure
 	 * 
@@ -81,32 +101,57 @@ public class House implements Serializable {
 			throw new DeepHouseFormatException("MalFormed JSON "
 					+ e.getMessage());
 		}
-		/*if (sensorType instanceof SensorType) {
+		if (sensorType instanceof SensorType) {
 			Room r = rooms.get(roomId);
-			r.sensors.addSensor(idSensor, (SensorType) sensorType);
+			r.addSensor(idSensor, (SensorType) sensorType);
 		} else {
 			throw new DeepHouseFormatException(
 					"MalFormed JSON : unknown room or sensor type");
-		}*/
+		}
 	}
-
+	
+	/**
+	 * JSON Structure
+	 * 
+	 * �piece� : �numPiece�, �idActuator� : �idCapteur�, �type � : �typeCapteur�
+	 * */
+	public void addActuator(JSONObject json) throws DeepHouseException {
+		Object actuatorType;
+		int roomId;
+		String idActuator;
+		try {
+			roomId = json.getInt("piece");
+			idActuator = json.getString("idActuator");
+			actuatorType = json.get("type");
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("MalFormed JSON "
+					+ e.getMessage());
+		}
+		if (actuatorType instanceof ActuatorType) {
+			Room r = rooms.get(roomId);
+			r.addActuator(idActuator, (ActuatorType) actuatorType);
+		} else {
+			throw new DeepHouseFormatException(
+					"MalFormed JSON : unknown room or actuator type");
+		}
+	}
 
 	/**
 	 * JSONObject:
 	 * 
-	 * "piece" : idPiece
-	 * "typeAction" : string (see RoomConstants
-	 * "valeur" : valeurCapteur= string
+	 * "piece" : idPiece "typeAction" : string (see RoomConstants "valeur" :
+	 * valeurCapteur= string
 	 * */
-	public void userAction(JSONObject json) throws DeepHouseException{
+	public void userAction(JSONObject json) throws DeepHouseException {
 		try {
 			int roomId = json.getInt("piece");
 			String typeAction = json.getString("typeAction");
 			String value = json.getString("valeur");
 			String actuatorId = json.getString("actuator");
-			
-			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
-				throw new DeepHouseFormatException("Unknown room id : " +roomId);
+
+			if (roomId < 0 || roomId >= RoomConstants.NB_PIECES) {
+				throw new DeepHouseFormatException("Unknown room id : "
+						+ roomId);
 			}
 			Room r = rooms.get(roomId);
 			r.userAction(typeAction, value, actuatorId);
@@ -116,12 +161,9 @@ public class House implements Serializable {
 		}
 	}
 
-
-
-
 	public Sensor<Object> updateSensor(Frame frame) throws DeepHouseException {
-		for(Room r : rooms) {
-			if(r.sensors.containsKey(frame.getId())) {
+		for (Room r : rooms) {
+			if (r.sensors.containsKey(frame.getId())) {
 				r.updateSensor(frame);
 				return r.sensors.get(frame.getId());
 			}
@@ -131,15 +173,14 @@ public class House implements Serializable {
 
 	public boolean updateSensor(SensorType sensorType, Object value) {
 		boolean found = false;
-		for(Room r : rooms) {
-			Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors().entrySet();
+		for (Room r : rooms) {
+			Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors()
+					.entrySet();
 
-			for(Map.Entry<String, Sensor<Object>> entry : set)
-			{
+			for (Map.Entry<String, Sensor<Object>> entry : set) {
 				Sensor<Object> sensor = entry.getValue();
-				
-				if(sensor.getType().equals(sensorType))
-				{
+
+				if (sensor.getType().equals(sensorType)) {
 					sensor.setLastValue(value);
 					found = true;
 				}
@@ -147,20 +188,18 @@ public class House implements Serializable {
 		}
 		return found;
 	}
-	
+
 	public boolean updateSensor(int idRoom, SensorType sensorType, Object value) {
 		boolean found = false;
-		for(Room r : rooms) {
-			if(r.getIdRoom() == idRoom)
-			{
-				Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors().entrySet();
+		for (Room r : rooms) {
+			if (r.getIdRoom() == idRoom) {
+				Set<Map.Entry<String, Sensor<Object>>> set = r.getSensors()
+						.entrySet();
 
-				for(Map.Entry<String, Sensor<Object>> entry : set)
-				{
+				for (Map.Entry<String, Sensor<Object>> entry : set) {
 					Sensor<Object> sensor = entry.getValue();
-					
-					if(sensor.getType().equals(sensorType))
-					{
+
+					if (sensor.getType().equals(sensorType)) {
 						sensor.setLastValue(value);
 						found = true;
 					}
@@ -170,9 +209,10 @@ public class House implements Serializable {
 		return found;
 	}
 
-	public Actuator<Object> updateActuator(Frame frame) throws DeepHouseException {
-		for(Room r : rooms) {
-			if(r.actuators.containsKey(frame.getId())) {
+	public Actuator<Object> updateActuator(Frame frame)
+			throws DeepHouseException {
+		for (Room r : rooms) {
+			if (r.actuators.containsKey(frame.getId())) {
 				r.updateActuator(frame);
 				return r.actuators.get(frame.getId());
 			}
@@ -180,27 +220,8 @@ public class House implements Serializable {
 		return null;
 	}
 
-
-	
-	@OneToMany
-	public List<Room> getRooms() {
-		return rooms;
-	}
-	
-	
-
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
-	}
-
-	@Id
-	@Column(name = "idhouse", nullable = false)
-	public int getIdHouse() {
-		return idHouse;
-	}
-
-	public void setIdHouse(int idHouse) {
-		this.idHouse = idHouse;
 	}
 
 }

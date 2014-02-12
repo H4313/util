@@ -1,11 +1,8 @@
 package com.h4313.deephouse.sensor;
 
-import java.util.Hashtable;
-
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
@@ -28,7 +25,6 @@ public class TemperatureSensor extends Sensor<Double> {
 		this.id = id;
 		this.type = type;
 		lastValue = Double.valueOf(25.0);
-		actuators =  new Hashtable<String, Actuator<Object>>();
 	}
 	
 	@Transient

@@ -1,11 +1,9 @@
 package com.h4313.deephouse.sensor;
 
 import java.io.Serializable;
-import java.util.Hashtable;
 
 import javax.persistence.*;
 
-import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.SensorType;
@@ -33,7 +31,6 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 		this.lastValue = false;
 		this.falseText = falseText;
 		this.trueText = truetext;
-		actuators =  new Hashtable<String, Actuator<Object>>();
 	}
 	
 	public BooleanSensor() {

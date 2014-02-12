@@ -50,6 +50,39 @@ public abstract class Room implements Serializable {
 
 	}
 
+	/************** Getters and Setters ****************/
+
+	@Id
+	@Column(name = "idRoom", nullable = false)
+	public int getIdRoom() {
+		return idRoom;
+	}
+
+	public void setIdRoom(int idRoom) {
+		this.idRoom = idRoom;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@MapKey(name = "id")
+	public Map<String, Actuator<Object>> getActuators() {
+		return actuators;
+	}
+
+	public void setActuators(Map<String, Actuator<Object>> actuators) {
+		this.actuators = actuators;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@MapKey(name = "id")
+	public Map<String, Sensor<Object>> getSensors() {
+		return sensors;
+	}
+
+	public void setSensors(Map<String, Sensor<Object>> sensors) {
+		this.sensors = sensors;
+	}
+
+	/************** Methods (if there are no params, cannot start with get) ****************/
 	@SuppressWarnings("unchecked")
 	public void userAction(String action, String value, String actuatorId)
 			throws DeepHouseException {
@@ -57,8 +90,6 @@ public abstract class Room implements Serializable {
 		ArrayList<Actuator<Object>> list;
 		if (RoomConstants.tempAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.RADIATOR);
-			// } else if (RoomConstants.humAction.equals(action)) {
-			// list = getActuatorByType(ActuatorType.HUMIDITYCONTROL);
 		} else if (RoomConstants.lightAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
 		} else if (RoomConstants.windAction.equals(action)) {
@@ -76,7 +107,6 @@ public abstract class Room implements Serializable {
 	}
 
 	public void addSensor(String id, SensorType type) throws DeepHouseException {
-
 		this.sensors.put(id, SensorFactory.createSensor(id, type));
 	}
 
@@ -128,10 +158,7 @@ public abstract class Room implements Serializable {
 		this.connectSensorActuator(s, act);
 	}
 
-	public void connectSensorActuator(Sensor<Object> s, Actuator<Object> act) {
-		if (!s.getActuators().containsValue(act)) {
-			s.getActuators().put(act.getId(), act);
-		}
+	private void connectSensorActuator(Sensor<Object> s, Actuator<Object> act) {
 		if (!act.getSensors().containsValue(s)) {
 			act.getSensors().put(s.getId(), s);
 		}
@@ -178,44 +205,13 @@ public abstract class Room implements Serializable {
 				System.out.println("    " + s.toString());
 			}
 		}
-		System.out.println("\nUnconnected sensors");
+		System.out.println("\nSensors");
 		eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
 		while (eS.hasMoreElements()) {
 			s = eS.nextElement();
-			if(s.getActuators().isEmpty())
-				System.out.println(" " + s.toString());
+			System.out.println(" " + s.toString());
 		}
 		System.out.println();
-	}
-
-	@Id
-	@Column(name = "idRoom", nullable = false)
-	public int getIdRoom() {
-		return idRoom;
-	}
-
-	public void setIdRoom(int idRoom) {
-		this.idRoom = idRoom;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@MapKey(name = "id")
-	public Map<String, Sensor<Object>> getSensors() {
-		return sensors;
-	}
-
-	public void setSensors(Map<String, Sensor<Object>> sensors) {
-		this.sensors = sensors;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@MapKey(name = "id")
-	public Map<String, Actuator<Object>> getActuators() {
-		return actuators;
-	}
-
-	public void setActuators(Map<String, Actuator<Object>> actuators) {
-		this.actuators = actuators;
 	}
 
 	/**
