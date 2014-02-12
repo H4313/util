@@ -9,15 +9,15 @@ import com.h4313.deephouse.exceptions.*;
 import com.h4313.deephouse.actuator.*;
 
 
-public class ActuatorDAO extends DAO<Actuator> {
+public class ActuatorDAO extends DAO<Actuator<Object>> {
 
 	@Override
-	public Actuator find(Object id) throws DeepHouseTypeException {
+	public Actuator<Object> find(Object id) throws DeepHouseTypeException {
 		
 		if (!(id instanceof Integer)) {
 			throw new DeepHouseTypeException("Object is not good type, except : Integer");
 		}
-		return (Actuator) session.get(Actuator.class,(Integer) id );
+		return (Actuator<Object>) session.get(Actuator.class,(Integer) id );
 		
 		
 	}
@@ -28,12 +28,12 @@ public class ActuatorDAO extends DAO<Actuator> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Actuator> findAll() {
+	public List<Actuator<Object>> findAll() {
 			return session.createQuery("FROM "+Actuator.class.getName()).list();
 	}
 
 	@Override
-	public Actuator createUpdate(Actuator obj){
+	public Actuator<Object> createUpdate(Actuator<Object> obj){
 		Transaction transaction = null;
 		try {
 			
@@ -52,7 +52,7 @@ public class ActuatorDAO extends DAO<Actuator> {
 	}
 
 	@Override
-	public void delete(Actuator obj) {
+	public void delete(Actuator<Object> obj) {
 		Transaction transaction = null;
 		try {
 			

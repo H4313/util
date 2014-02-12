@@ -37,4 +37,9 @@ public abstract class Constant
     public static final int DEFAULT_MINUTE = 0;
     public static final int DEFAULT_SECOND = 0;
     public static final int TIME_FACTOR = 1440; // current time = real time * X
+
+    /**
+     * URL
+     */
+    public static final String URL_SERVEUR = "localhost:8080/deepHouse";
 }

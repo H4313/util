@@ -1,7 +1,6 @@
 package com.h4313.deephouse.housemodel;
 
 import java.io.Serializable;
-import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
@@ -71,7 +70,7 @@ public abstract class Room implements Serializable {
 					+ action);
 		}
 
-		for (Actuator act : list) {
+		for (Actuator<Object> act : list) {
 			act.setDesiredValue(value);
 		}
 	}
@@ -99,7 +98,7 @@ public abstract class Room implements Serializable {
 	}
 
 	public void updateActuator(Frame frame) throws DeepHouseException {
-		Actuator actuator = actuators.get(frame.getId());
+		Actuator<Object> actuator = actuators.get(frame.getId());
 		if (actuator == null) {
 			throw new DeepHouseNotFoundException("Id " + frame.getId()
 					+ "not found");
