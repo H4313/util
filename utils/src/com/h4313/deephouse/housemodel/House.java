@@ -11,8 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.json.JSONObject;
+
 import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.exceptions.DeepHouseException;
+import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
