@@ -62,57 +62,57 @@ public class House implements Serializable {
 		return House.instance;
 	}
 
-//	/**
-//	 * JSON Structure
-//	 * 
-//	 * �piece� : �numPiece�, �capteur� : �idCapteur�, �type � : �typeCapteur�
-//	 * */
-//	public void addSensor(JSONObject json) throws DeepHouseException {
-//		Object sensorType;
-//		int roomId;
-//		String idSensor;
-//		try {
-//			roomId = json.getInt("piece");
-//			idSensor = json.getString("capteur");
-//			sensorType = json.get("type");
-//		} catch (Exception e) {
-//			throw new DeepHouseFormatException("MalFormed JSON "
-//					+ e.getMessage());
-//		}
-//		if (sensorType instanceof SensorType) {
-//			Room r = rooms.get(roomId);
-//			r.sensors.addSensor(idSensor, (SensorType) sensorType);
-//		} else {
-//			throw new DeepHouseFormatException(
-//					"MalFormed JSON : unknown room or sensor type");
-//		}
-//	}
+	/**
+	 * JSON Structure
+	 * 
+	 * �piece� : �numPiece�, �capteur� : �idCapteur�, �type � : �typeCapteur�
+	 * */
+	public void addSensor(JSONObject json) throws DeepHouseException {
+		Object sensorType;
+		int roomId;
+		String idSensor;
+		try {
+			roomId = json.getInt("piece");
+			idSensor = json.getString("capteur");
+			sensorType = json.get("type");
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("MalFormed JSON "
+					+ e.getMessage());
+		}
+		/*if (sensorType instanceof SensorType) {
+			Room r = rooms.get(roomId);
+			r.sensors.addSensor(idSensor, (SensorType) sensorType);
+		} else {
+			throw new DeepHouseFormatException(
+					"MalFormed JSON : unknown room or sensor type");
+		}*/
+	}
 
 
-//	/**
-//	 * JSONObject:
-//	 * 
-//	 * "piece" : idPiece
-//	 * "typeAction" : string (see RoomConstants
-//	 * "valeur" : valeurCapteur= string
-//	 * */
-//	public void userAction(JSONObject json) throws DeepHouseException{
-//		try {
-//			int roomId = json.getInt("piece");
-//			String typeAction = json.getString("typeAction");
-//			String value = json.getString("valeur");
-//			String actuatorId = json.getString("actuator");
-//			
-//			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
-//				throw new DeepHouseFormatException("Unknown room id : " +roomId);
-//			}
-//			Room r = rooms.get(roomId);
-//			r.userAction(typeAction, value, actuatorId);
-//		} catch (Exception e) {
-//			throw new DeepHouseFormatException("MalFormed JSON : "
-//					+ e.getMessage());
-//		}
-//	}
+	/**
+	 * JSONObject:
+	 * 
+	 * "piece" : idPiece
+	 * "typeAction" : string (see RoomConstants
+	 * "valeur" : valeurCapteur= string
+	 * */
+	public void userAction(JSONObject json) throws DeepHouseException{
+		try {
+			int roomId = json.getInt("piece");
+			String typeAction = json.getString("typeAction");
+			String value = json.getString("valeur");
+			String actuatorId = json.getString("actuator");
+			
+			if(roomId < 0 || roomId >= RoomConstants.NB_PIECES ){
+				throw new DeepHouseFormatException("Unknown room id : " +roomId);
+			}
+			Room r = rooms.get(roomId);
+			r.userAction(typeAction, value, actuatorId);
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("MalFormed JSON : "
+					+ e.getMessage());
+		}
+	}
 
 
 
