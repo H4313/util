@@ -89,18 +89,9 @@ public class House implements Serializable {
 	 * 
 	 * �piece� : �numPiece�, �capteur� : �idCapteur�, �type � : �typeCapteur�
 	 * */
-	public void addSensor(JSONObject json) throws DeepHouseException {
-		Object sensorType;
-		int roomId;
-		String idSensor;
-		try {
-			roomId = json.getInt("piece");
-			idSensor = json.getString("capteur");
-			sensorType = json.get("type");
-		} catch (Exception e) {
-			throw new DeepHouseFormatException("MalFormed JSON "
-					+ e.getMessage());
-		}
+	public void addSensor(Integer roomId, String idSensor, String type) throws DeepHouseException {
+		SensorType sensorType = SensorType.valueOf(type);
+			
 		if (sensorType instanceof SensorType) {
 			Room r = rooms.get(roomId);
 			r.addSensor(idSensor, (SensorType) sensorType);
@@ -115,18 +106,9 @@ public class House implements Serializable {
 	 * 
 	 * �piece� : �numPiece�, �idActuator� : �idCapteur�, �type � : �typeCapteur�
 	 * */
-	public void addActuator(JSONObject json) throws DeepHouseException {
-		Object actuatorType;
-		int roomId;
-		String idActuator;
-		try {
-			roomId = json.getInt("piece");
-			idActuator = json.getString("idActuator");
-			actuatorType = json.get("type");
-		} catch (Exception e) {
-			throw new DeepHouseFormatException("MalFormed JSON "
-					+ e.getMessage());
-		}
+	public void addActuator(Integer roomId, String idActuator, String type) throws DeepHouseException {		
+		ActuatorType actuatorType = ActuatorType.valueOf(type);
+		
 		if (actuatorType instanceof ActuatorType) {
 			Room r = rooms.get(roomId);
 			r.addActuator(idActuator, (ActuatorType) actuatorType);
@@ -142,13 +124,8 @@ public class House implements Serializable {
 	 * "piece" : idPiece "typeAction" : string (see RoomConstants "valeur" :
 	 * valeurCapteur= string
 	 * */
-	public void userAction(JSONObject json) throws DeepHouseException {
-		try {
-			int roomId = json.getInt("piece");
-			String typeAction = json.getString("typeAction");
-			String value = json.getString("valeur");
-			String actuatorId = json.getString("actuator");
-
+	public void userAction(Integer roomId, String typeAction, String value, String actuatorId) throws DeepHouseException {
+		try {			
 			if (roomId < 0 || roomId >= RoomConstants.NB_PIECES) {
 				throw new DeepHouseFormatException("Unknown room id : "
 						+ roomId);
