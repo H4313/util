@@ -67,13 +67,14 @@ public class TcpSender extends Thread
 		try
 		{
 			String s = null;
-			while(alive)
+			boolean canSend = true;
+			while(alive && canSend)
 			{
 				s = applicant.callBack(null);
 				
 				if(s != null)
 				{
-					send(s);
+					canSend = send(s);
 				}
 				
 				 Thread.sleep(1000); // Wait X milliseconds
@@ -89,19 +90,24 @@ public class TcpSender extends Thread
 	/**
 	* Envoi un message.
 	*/
-	public void send(String message) throws Exception
+	public boolean send(String message) throws Exception
 	{
-		try
+		if(socket.isConnected())
 		{
-			byte[] byteswrite = new byte[Constant.TCP_FRAME_LENGTH];
-			byteswrite = message.getBytes();
-			out.write(byteswrite);
+			try
+			{
+				byte[] byteswrite = new byte[Constant.TCP_FRAME_LENGTH];
+				byteswrite = message.getBytes();
+				if(socket.isConnected()) out.write(byteswrite);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				throw new Exception("Impossible d'envoyer un message");
+			}
+			return true;
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			throw new Exception("Impossible d'envoyer un message");
-		}
+		else return false;
 	}
 	
 	/**
