@@ -52,9 +52,14 @@ public class TcpReceiver extends Thread
 		{
 			this.startListening();
 			
+			String message = null;
 			while(alive)
 			{
-				this.applicant.callBack(this.receive());
+				message = this.receive();
+				if(message != null)
+				{
+					this.applicant.callBack(message);
+				}
 			}
 		}
 		catch(Exception e)
