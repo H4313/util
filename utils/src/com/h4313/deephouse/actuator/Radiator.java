@@ -21,6 +21,11 @@ public class Radiator extends Actuator<Double> {
 	
 	protected Double desiredValue;
 
+	public Radiator()
+	{
+		
+	}
+	
 	public Radiator(String id, ActuatorType type) {
 		super(id, type);
 	}
@@ -75,7 +80,7 @@ public class Radiator extends Actuator<Double> {
 	@Override
 	protected String dataString() {
 		if(lastValue != null) {
-			return lastValue.toString() + " °C";	
+			return lastValue.toString() + " ï¿½C";	
 		}
 		return "No value";
 	}
