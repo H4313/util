@@ -45,9 +45,6 @@ public class TcpSender extends Thread
 				}
 			} while(!isConnected || this.socket == null || !this.socket.isConnected());
 			
-//			this.receiverAddress = ip;
-//			this.receiverPort = port;
-			
 			this.out = this.socket.getOutputStream();
 			
 			this.applicant = applicant;
@@ -72,7 +69,7 @@ public class TcpSender extends Thread
 			{
 				s = applicant.callBack(null);
 				
-				if(s != null)
+				if(s != null && !s.isEmpty())
 				{
 					System.out.println("Message envoye : " + s);
 					canSend = send(s);
