@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import com.h4313.deephouse.network.CallBack;
 
-public class TcpSendExample implements CallBack
+public class _TcpSendExample implements CallBack
 {
 	private ArrayList<String> messages;
 	
-	public TcpSendExample(String ip, int port)
+	public _TcpSendExample(String ip, int port)
 	{
 		messages = new ArrayList<String>();
 		

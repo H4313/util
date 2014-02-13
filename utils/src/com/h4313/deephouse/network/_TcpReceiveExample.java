@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import com.h4313.deephouse.network.CallBack;
 
-public class TcpReceiveExample implements CallBack
+public class _TcpReceiveExample implements CallBack
 {
 	private volatile boolean record;
 	private ArrayList<String> messages;
 	
-	public TcpReceiveExample(int port)
+	public _TcpReceiveExample(int port)
 	{
 		messages = new ArrayList<String>();
 		
