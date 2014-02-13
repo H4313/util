@@ -23,6 +23,9 @@ public class BooleanActuator extends Actuator<Boolean> {
 
 	protected String falseText;
 	
+	// Uniquement pour Hibernate
+	public BooleanActuator() {
+	}
 
 	public BooleanActuator(String id, ActuatorType type, String falseText,
 			String trueText) {
