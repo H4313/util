@@ -1,7 +1,5 @@
 package com.h4313.deephouse.actuator;
 
-import com.h4313.deephouse.sensor.SensorType;
-
 public enum ActuatorType {
 	// all actuators are virtual?
 	RADIATOR(false, "B55A1005", "Radiator"), 
