@@ -66,12 +66,12 @@ public class BooleanActuator extends Actuator<Boolean> {
 	}
 	
 	@Override
-	@Column
+	@Transient
 	public Boolean getDesiredValue() {
 		return this.desiredValue;
 	}
 	
-	@Column
+	@Transient
 	public Boolean getLastValue() {
 		return lastValue;
 	}
@@ -114,15 +114,15 @@ public class BooleanActuator extends Actuator<Boolean> {
 	@Transient
 	public Double getLastValuePersist() {
 		if(this.lastValue){
-			return (double) 1;
+			return (double) 1.0;
 		}else{
-			return (double) 0;
+			return (double) 0.0;
 		}
 	}
 
 	@Override
 	public void setLastValuePersist(Double lastValuePersist) {
-		if(lastValuePersist==1){
+		if(lastValuePersist==1.0){
 			this.lastValue=true;
 		}else{
 			this.lastValue=false;

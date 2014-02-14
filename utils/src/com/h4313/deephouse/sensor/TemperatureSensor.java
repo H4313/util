@@ -72,9 +72,9 @@ public class TemperatureSensor extends Sensor<Double> {
 	@Override
 	@Transient
 	public Double getLastValuePersist() {
-		
 		return this.lastValue;
 	}
+	
 	@Override
 	public void setLastValuePersist(Double lastValuePersist){
 		this.lastValue=lastValuePersist;	

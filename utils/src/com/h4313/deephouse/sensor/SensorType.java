@@ -5,8 +5,8 @@ public enum SensorType {
 	TEMPERATURE(true, "A55A1005", "Temperature"), 
 	WINDOW(true, "A55A0B05","Window state"), 
 	LIGHT(true, "A55A0005", "Light state"), 
-	DOOR(false, "00000000", "Door state"),
-	FLAP(false, "00000000", "Flap state"),
+	DOOR(false, "A55A0006", "Door state"),
+	FLAP(false, "A55A0007", "Flap state"),
 	PRESENCE(true, "A55A0105", "Presence");
 	// HUMIDITY(false,"A55A0106","Humidity"),
 	// NOISE(false,"A55A0107","Noise"),
