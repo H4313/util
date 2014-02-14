@@ -188,26 +188,15 @@ public abstract class Room implements Serializable {
 	}
 
 	public void printInformations() {
-		Enumeration<Sensor<Object>> eS;
-		Sensor<Object> s;
-
 		System.out.println("Room " + this.idRoom + " :");
 		if (actuators.isEmpty()) {
 			System.out.println("No actuators");
 		} else {
-			Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
-					.elements();
-			Actuator<Object> act;
-
 			System.out.println("Actuators");
-			while (eActuators.hasMoreElements()) {
-				act = eActuators.nextElement();
+			for(Actuator<Object> act : actuators.values()){
 				System.out.println(act.toString());
-				eS = ((Hashtable<String, Sensor<Object>>) act.getSensors())
-						.elements();
-				while (eS.hasMoreElements()) {
-					s = eS.nextElement();
-					System.out.println("    " + s.toString());
+				for(Sensor<Object> s : act.getSensors().values()){
+					System.out.println(s.toString());
 				}
 			}
 		}
@@ -215,10 +204,8 @@ public abstract class Room implements Serializable {
 			System.out.println("No actuators");
 		} else {
 			System.out.println("\nSensors");
-			eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
-			while (eS.hasMoreElements()) {
-				s = eS.nextElement();
-				System.out.println(" " + s.toString());
+			for(Sensor<Object> s : sensors.values()){
+				System.out.println(s.toString());
 			}
 		}
 		System.out.println();

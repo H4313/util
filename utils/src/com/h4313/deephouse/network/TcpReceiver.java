@@ -58,7 +58,7 @@ public class TcpReceiver extends Thread
 				message = this.receive();
 				if(message != null && !message.isEmpty())
 				{
-					System.out.println("Message recu : " + message + "----" + message.length());
+					System.out.println("Message recu : " + message);
 					this.applicant.callBack(message);
 				}
 			}
@@ -66,7 +66,12 @@ public class TcpReceiver extends Thread
 		catch(Exception e)
 		{
 //			e.printStackTrace();
-			System.out.println("Erreur avec le TCP");
+			System.out.println("Erreur avec le TCP : " + e.getMessage());
+			try {
+				closeReceiver();
+			} catch (Exception e1) {
+				System.out.println("Arret impossible : " + e.getMessage());
+			}
 		}
 	}
 	
@@ -80,6 +85,15 @@ public class TcpReceiver extends Thread
 		try
 		{
 			this.in.read(buffer);
+			
+			// Securite temporaire
+			if(Byte.valueOf(buffer[0]).equals(Byte.valueOf("0"))
+					&& Byte.valueOf(buffer[1]).equals(Byte.valueOf("0"))
+					&& Byte.valueOf(buffer[2]).equals(Byte.valueOf("0"))
+					&& Byte.valueOf(buffer[3]).equals(Byte.valueOf("0"))
+					&& Byte.valueOf(buffer[4]).equals(Byte.valueOf("0"))
+					&& Byte.valueOf(buffer[5]).equals(Byte.valueOf("0")))
+				return null;
 		}
 		catch(Exception e)
 		{
