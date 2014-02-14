@@ -74,9 +74,8 @@ public class House implements Serializable {
 	public final static void initInstance(HouseDAO houseDao)
 			throws DeepHouseException {
 		House.instance = houseDao.find(0);
-		if (House.instance == null) {
-			throw new DeepHouseNotFoundException("Cannot find House 0 in Db");
-		}
+		System.out.println("Cannot find House 0 in Db");
+		houseDao.createUpdate(House.getInstance());
 	}
 
 	/************** Getters and Setters ****************/
