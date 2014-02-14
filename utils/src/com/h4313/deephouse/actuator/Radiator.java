@@ -29,8 +29,8 @@ public class Radiator extends Actuator<Double> {
 	public Radiator(String id, ActuatorType type) {
 		super(id, type);
 		
-		lastValue = Double.valueOf(25.0);
-		desiredValue = Double.valueOf(25.0);
+		lastValue = Double.valueOf(Constant.DEFAULT_TEMPERATURE);
+		desiredValue = Double.valueOf(Constant.DEFAULT_TEMPERATURE);
 	}
 
 	@Override

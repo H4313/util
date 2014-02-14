@@ -15,6 +15,8 @@ public abstract class Constant
 	
 	public static final Double SENSOR_TEMPERATURE_MAX = 50.0;
 	
+	public static final Double DEFAULT_TEMPERATURE = 25.0;
+	
 	public static final int SENSOR_TEMPERATURE_BYTES = 2;
 	
 	public static final int FRAME_DATA_LENGTH_BYTES = 4;

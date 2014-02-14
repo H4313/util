@@ -24,7 +24,7 @@ public class TemperatureSensor extends Sensor<Double> {
 	public TemperatureSensor(String id, SensorType type) {
 		this.id = id;
 		this.type = type;
-		lastValue = Double.valueOf(25.0);
+		lastValue = Double.valueOf(Constant.DEFAULT_TEMPERATURE);
 	}
 	
 	@Transient
