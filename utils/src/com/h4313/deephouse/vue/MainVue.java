@@ -1,6 +1,7 @@
 package com.h4313.deephouse.vue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -36,23 +37,24 @@ public class MainVue extends JFrame {
 	public MainVue(AbstractTableModel mS,String titre) {
         super();
         this.modele=(GenericModeleVue) mS;
-        setTitle("Visualisation");
+        setTitle(titre);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         
          tabFrame = new JTable(mS);
-        JPanel panelTabSensor = new JPanel ();
+      /*  JPanel panelTabSensor = new JPanel ();
         panelTabSensor.setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
                 titre,
                 TitledBorder.CENTER,
                 TitledBorder.TOP));
         panelTabSensor.add(new JScrollPane(tabFrame));
         tabFrame.setAutoCreateRowSorter(true);
-        
-        
-        
-
-        getContentPane().add(new JScrollPane(panelTabSensor), BorderLayout.CENTER);
+        tabFrame.setPreferredSize(new Dimension(600, 1000));
+        panelTabSensor.setPreferredSize(new Dimension(600, 1000));*/
+        BorderLayout blayout1 = new BorderLayout();
+        this.setPreferredSize(new Dimension(500, 1000));
+        this.setLayout(blayout1);
+        getContentPane().add(new JScrollPane(tabFrame), BorderLayout.CENTER);
         
         
         pack();
