@@ -42,4 +42,9 @@ public abstract class Constant
      * URL
      */
     public static final String URL_SERVEUR = "localhost:8080/deepHouse";
+    public static final String URL_WEB_SERVICE_HOUSEMODEL = "localhost:8080/deepHouse/rest/houseModel";
+    public static final String URL_WEB_SERVICE_ADDSENSOR = "localhost:8080/deepHouse/rest/addSensor";
+    public static final String URL_WEB_SERVICE_ADDACTUATOR = "localhost:8080/deepHouse/rest/addActuator";
+    public static final String URL_WEB_SERVICE_USERACTION = "localhost:8080/deepHouse/rest/userAction";
+ 
 }
