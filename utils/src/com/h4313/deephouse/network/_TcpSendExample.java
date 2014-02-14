@@ -1,9 +1,6 @@
 package com.h4313.deephouse.network;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import com.h4313.deephouse.network.CallBack;
 
 public class _TcpSendExample implements CallBack
 {

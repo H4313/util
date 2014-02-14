@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.h4313.deephouse.network.CallBack;
 import com.h4313.deephouse.util.Constant;
 
 public class TcpReceiver extends Thread

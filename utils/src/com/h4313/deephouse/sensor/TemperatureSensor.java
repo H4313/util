@@ -5,7 +5,6 @@ import javax.persistence.Transient;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
-import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 import com.h4313.deephouse.util.DecToHexConverter;
 

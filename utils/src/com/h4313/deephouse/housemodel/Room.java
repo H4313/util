@@ -1,10 +1,9 @@
 package com.h4313.deephouse.housemodel;
 
 import java.io.Serializable;
-import java.util.Enumeration;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,16 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 
-import com.h4313.deephouse.actuator.*;
-import com.h4313.deephouse.exceptions.DeepHouseDuplicateException;
 import com.h4313.deephouse.actuator.Actuator;
+import com.h4313.deephouse.actuator.ActuatorFactory;
 import com.h4313.deephouse.actuator.ActuatorType;
+import com.h4313.deephouse.exceptions.DeepHouseDuplicateException;
 import com.h4313.deephouse.exceptions.DeepHouseException;
+import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.exceptions.DeepHouseNotFoundException;
 import com.h4313.deephouse.frame.Frame;
-import com.h4313.deephouse.sensor.*;
-import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.sensor.Sensor;
+import com.h4313.deephouse.sensor.SensorFactory;
 import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Tool;
 
@@ -169,18 +168,9 @@ public abstract class Room implements Serializable {
 	 * rooms lists of sensors and actuators
 	 */
 	public void establishConnections() throws DeepHouseException {
-		Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
-				.elements();
-		Enumeration<Sensor<Object>> eS;
-		Actuator<Object> act;
-		Sensor<Object> s;
-
-		while (eActuators.hasMoreElements()) {
-			act = eActuators.nextElement();
-			eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
-			while (eS.hasMoreElements()) {
-				s = eS.nextElement();
-				if (Tool.testTypeConnectivity(s.getType(), act.getType())) {
+		for(Actuator<Object> act : actuators.values()){
+			for(Sensor<Object> s : sensors.values()){
+				if(Tool.testTypeConnectivity(s.getType(), act.getType())){
 					this.connectSensorActuator(s, act);
 				}
 			}

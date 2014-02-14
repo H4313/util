@@ -5,8 +5,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import com.h4313.deephouse.exceptions.*;
-import com.h4313.deephouse.actuator.*;
+import com.h4313.deephouse.actuator.Actuator;
+import com.h4313.deephouse.exceptions.DeepHouseTypeException;
 
 
 public class ActuatorDAO extends DAO<Actuator<Object>> {

@@ -1,9 +1,13 @@
 
 package com.h4313.deephouse.util;
 
-import org.hibernate.*;
-import org.hibernate.cfg.*;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 
+import com.h4313.deephouse.actuator.BooleanActuator;
+import com.h4313.deephouse.actuator.Radiator;
 import com.h4313.deephouse.housemodel.Bathroom;
 import com.h4313.deephouse.housemodel.Bedroom;
 import com.h4313.deephouse.housemodel.Corridor;
@@ -12,8 +16,8 @@ import com.h4313.deephouse.housemodel.Kitchen;
 import com.h4313.deephouse.housemodel.LivingRoom;
 import com.h4313.deephouse.housemodel.Office;
 import com.h4313.deephouse.housemodel.Room;
-import com.h4313.deephouse.sensor.*;
-import com.h4313.deephouse.actuator.*;
+import com.h4313.deephouse.sensor.BooleanSensor;
+import com.h4313.deephouse.sensor.TemperatureSensor;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;

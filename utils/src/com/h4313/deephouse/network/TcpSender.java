@@ -2,11 +2,8 @@ package com.h4313.deephouse.network;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 
-import com.h4313.deephouse.network.CallBack;
 import com.h4313.deephouse.util.Constant;
 
 public class TcpSender extends Thread

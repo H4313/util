@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import com.h4313.deephouse.exceptions.*;
+import com.h4313.deephouse.exceptions.DeepHouseTypeException;
 import com.h4313.deephouse.housemodel.Room;
 
 

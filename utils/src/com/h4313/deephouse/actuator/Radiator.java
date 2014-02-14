@@ -1,6 +1,5 @@
 package com.h4313.deephouse.actuator;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 

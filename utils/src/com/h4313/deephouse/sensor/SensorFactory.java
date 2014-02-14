@@ -1,7 +1,6 @@
 package com.h4313.deephouse.sensor;
 
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
-import com.h4313.deephouse.sensor.SensorType;
 
 public class SensorFactory {
 

@@ -2,11 +2,12 @@ package com.h4313.deephouse.sensor;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.frame.Frame;
-import com.h4313.deephouse.sensor.SensorType;
 import com.h4313.deephouse.util.Constant;
 
 

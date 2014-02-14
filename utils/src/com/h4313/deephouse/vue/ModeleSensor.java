@@ -5,12 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-
-
-
-
-
 import javax.swing.table.AbstractTableModel;
 
 import com.h4313.deephouse.housemodel.House;
