@@ -41,13 +41,13 @@ public abstract class Room implements Serializable {
 	protected Map<String, Actuator<Object>> actuators;
 
 	public Room(int id) {
+		this();
 		this.idRoom = id;
-		this.sensors = new Hashtable<String, Sensor<Object>>();
-		this.actuators = new Hashtable<String, Actuator<Object>>();
 	}
 
 	public Room() {
-
+		this.sensors = new Hashtable<String, Sensor<Object>>();
+		this.actuators = new Hashtable<String, Actuator<Object>>();
 	}
 
 	/************** Getters and Setters ****************/
@@ -188,28 +188,38 @@ public abstract class Room implements Serializable {
 	}
 
 	public void printInformations() {
-		Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
-				.elements();
 		Enumeration<Sensor<Object>> eS;
-		Actuator<Object> act;
 		Sensor<Object> s;
 
 		System.out.println("Room " + this.idRoom + " :");
-		while (eActuators.hasMoreElements()) {
-			act = eActuators.nextElement();
-			System.out.println(act.toString());
-			eS = ((Hashtable<String, Sensor<Object>>) act.getSensors())
+		if (actuators.isEmpty()) {
+			System.out.println("No actuators");
+		} else {
+			Enumeration<Actuator<Object>> eActuators = ((Hashtable<String, Actuator<Object>>) actuators)
 					.elements();
-			while (eS.hasMoreElements()) {
-				s = eS.nextElement();
-				System.out.println("    " + s.toString());
+			Actuator<Object> act;
+
+			System.out.println("Actuators");
+			while (eActuators.hasMoreElements()) {
+				act = eActuators.nextElement();
+				System.out.println(act.toString());
+				eS = ((Hashtable<String, Sensor<Object>>) act.getSensors())
+						.elements();
+				while (eS.hasMoreElements()) {
+					s = eS.nextElement();
+					System.out.println("    " + s.toString());
+				}
 			}
 		}
-		System.out.println("\nSensors");
-		eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
-		while (eS.hasMoreElements()) {
-			s = eS.nextElement();
-			System.out.println(" " + s.toString());
+		if (sensors.isEmpty()) {
+			System.out.println("No actuators");
+		} else {
+			System.out.println("\nSensors");
+			eS = ((Hashtable<String, Sensor<Object>>) sensors).elements();
+			while (eS.hasMoreElements()) {
+				s = eS.nextElement();
+				System.out.println(" " + s.toString());
+			}
 		}
 		System.out.println();
 	}

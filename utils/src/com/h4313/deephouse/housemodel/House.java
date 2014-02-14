@@ -11,12 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.json.JSONObject;
-
 import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.actuator.ActuatorType;
+import com.h4313.deephouse.dao.HouseDAO;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
+import com.h4313.deephouse.exceptions.DeepHouseNotFoundException;
+import com.h4313.deephouse.exceptions.DeepHouseTypeException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
@@ -65,6 +66,18 @@ public class House implements Serializable {
 		return House.instance;
 	}
 
+	public final static void setInstance(House h) {
+		House.instance = h;
+	}
+
+	public final static void initInstance(HouseDAO houseDao)
+			throws DeepHouseException {
+		House.instance = houseDao.find(0);
+		if (House.instance == null) {
+			throw new DeepHouseNotFoundException("Cannot find House 0 in Db");
+		}
+	}
+
 	/************** Getters and Setters ****************/
 
 	@Id
@@ -76,22 +89,27 @@ public class House implements Serializable {
 	public void setIdHouse(int idHouse) {
 		this.idHouse = idHouse;
 	}
-	
+
 	@OneToMany
 	public List<Room> getRooms() {
 		return rooms;
 	}
 
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+
 	/************** Methods (if there are no params, cannot start with get) ****************/
-	
+
 	/**
 	 * JSON Structure
 	 * 
 	 * �piece� : �numPiece�, �capteur� : �idCapteur�, �type � : �typeCapteur�
 	 * */
-	public void addSensor(Integer roomId, String idSensor, String type) throws DeepHouseException {
+	public void addSensor(Integer roomId, String idSensor, String type)
+			throws DeepHouseException {
 		SensorType sensorType = SensorType.valueOf(type);
-			
+
 		if (sensorType instanceof SensorType) {
 			Room r = rooms.get(roomId);
 			r.addSensor(idSensor, (SensorType) sensorType);
@@ -100,15 +118,16 @@ public class House implements Serializable {
 					"MalFormed JSON : unknown room or sensor type");
 		}
 	}
-	
+
 	/**
 	 * JSON Structure
 	 * 
 	 * �piece� : �numPiece�, �idActuator� : �idCapteur�, �type � : �typeCapteur�
 	 * */
-	public void addActuator(Integer roomId, String idActuator, String type) throws DeepHouseException {		
+	public void addActuator(Integer roomId, String idActuator, String type)
+			throws DeepHouseException {
 		ActuatorType actuatorType = ActuatorType.valueOf(type);
-		
+
 		if (actuatorType instanceof ActuatorType) {
 			Room r = rooms.get(roomId);
 			r.addActuator(idActuator, (ActuatorType) actuatorType);
@@ -124,8 +143,9 @@ public class House implements Serializable {
 	 * "piece" : idPiece "typeAction" : string (see RoomConstants "valeur" :
 	 * valeurCapteur= string
 	 * */
-	public void userAction(Integer roomId, String typeAction, String value, String actuatorId) throws DeepHouseException {
-		try {			
+	public void userAction(Integer roomId, String typeAction, String value,
+			String actuatorId) throws DeepHouseException {
+		try {
 			if (roomId < 0 || roomId >= RoomConstants.NB_PIECES) {
 				throw new DeepHouseFormatException("Unknown room id : "
 						+ roomId);
@@ -197,8 +217,11 @@ public class House implements Serializable {
 		return null;
 	}
 
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
+	public void printInformations() {
+		System.out.println("House id : " + idHouse);
+		for (Room r : rooms) {
+			r.printInformations();
+		}
 	}
 
 }
