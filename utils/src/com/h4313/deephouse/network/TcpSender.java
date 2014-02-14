@@ -78,7 +78,7 @@ public class TcpSender extends Thread
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("Erreur avec le TCP");
+			System.out.println("Erreur avec le TCP : " + e.getMessage());
 		}
 	}
 	
@@ -87,13 +87,21 @@ public class TcpSender extends Thread
 	*/
 	public boolean send(String message) throws Exception
 	{
-		if(socket.isConnected())
+		if(socket.isConnected() 
+			&& !socket.isClosed() 
+			&& !socket.isOutputShutdown()
+			&& message != null)
 		{
 			try
 			{
 				byte[] byteswrite = new byte[Constant.TCP_FRAME_LENGTH];
 				byteswrite = message.getBytes();
-				if(socket.isConnected()) out.write(byteswrite);
+				if(socket.isConnected() 
+						&& !socket.isClosed() 
+						&& !socket.isOutputShutdown()) 
+					out.write(byteswrite);
+				else
+					return false;
 			}
 			catch(Exception e)
 			{
