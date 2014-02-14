@@ -67,7 +67,9 @@ public class House implements Serializable {
 	}
 
 	public final static void setInstance(House h) {
-		House.instance = h;
+		synchronized (House.class) {
+			House.instance = h;
+		}
 	}
 
 	public final static void initInstance(HouseDAO houseDao)
