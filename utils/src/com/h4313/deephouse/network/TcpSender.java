@@ -90,7 +90,7 @@ public class TcpSender extends Thread
 	*/
 	public boolean send(String message) throws Exception
 	{
-		if(socket.isConnected())
+		if(socket.isConnected() && message != null)
 		{
 			try
 			{

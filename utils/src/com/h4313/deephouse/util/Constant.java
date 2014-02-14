@@ -52,6 +52,6 @@ public abstract class Constant
     /**
      * Application Android
      */
-    public static final MILLISECONDS_TILL_REFRESH = 10000; // 10 secondes
+    public static final long MILLISECONDS_TILL_REFRESH = 10000; // 10 secondes
  
 }
