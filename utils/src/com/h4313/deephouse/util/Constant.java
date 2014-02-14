@@ -48,5 +48,10 @@ public abstract class Constant
     public static final String URL_WEB_SERVICE_ADDSENSOR = "localhost:8080/deepHouse/rest/addSensor";
     public static final String URL_WEB_SERVICE_ADDACTUATOR = "localhost:8080/deepHouse/rest/addActuator";
     public static final String URL_WEB_SERVICE_USERACTION = "localhost:8080/deepHouse/rest/userAction";
+    
+    /**
+     * Application Android
+     */
+    public static final MILLISECONDS_TILL_REFRESH = 10000; // 10 secondes
  
 }
