@@ -72,7 +72,7 @@ public class TcpSender extends Thread
 					canSend = send(s);
 				}
 				
-				 Thread.sleep(1000); // Wait X milliseconds
+				 //Thread.sleep(1000); // Wait X milliseconds
 			}
 		}
 		catch(Exception e)
