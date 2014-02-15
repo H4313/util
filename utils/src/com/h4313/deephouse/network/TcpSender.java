@@ -105,8 +105,9 @@ public class TcpSender extends Thread
 			}
 			catch(Exception e)
 			{
-				e.printStackTrace();
-				throw new Exception("Impossible d'envoyer un message");
+				return false;
+//				e.printStackTrace();
+//				throw new Exception("Impossible d'envoyer un message");
 			}
 			return true;
 		}
