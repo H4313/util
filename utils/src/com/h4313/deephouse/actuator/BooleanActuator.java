@@ -1,4 +1,3 @@
-
 package com.h4313.deephouse.actuator;
 
 import javax.persistence.Entity;
@@ -15,13 +14,13 @@ public class BooleanActuator extends Actuator<Boolean> {
 	private static final long serialVersionUID = 1L;
 
 	protected boolean lastValue;
-	
+
 	protected boolean desiredValue;
 
 	protected String trueText;
 
 	protected String falseText;
-	
+
 	// Uniquement pour Hibernate
 	public BooleanActuator() {
 	}
@@ -63,13 +62,13 @@ public class BooleanActuator extends Actuator<Boolean> {
 			throw new DeepHouseFormatException("Format exception: " + value);
 		}
 	}
-	
+
 	@Override
 	@Transient
 	public Boolean getDesiredValue() {
 		return this.desiredValue;
 	}
-	
+
 	@Transient
 	public Boolean getLastValue() {
 		return lastValue;
@@ -82,52 +81,51 @@ public class BooleanActuator extends Actuator<Boolean> {
 	@Override
 	protected String dataString() {
 		if (lastValue) {
-			return trueText;
+			return (trueText != null) ? trueText : "true";
 		} else {
-			return falseText;
+			return (falseText != null) ? falseText : "false";
 		}
 	}
 
 	@Override
 	@Transient
 	public Double getDesiredValuePersist() {
-		
-		if(this.desiredValue){
+
+		if (this.desiredValue) {
 			return (double) 1;
-		}else{
+		} else {
 			return (double) 0;
 		}
 	}
 
 	@Override
 	public void setDesiredValuePersist(Double desiredValuePersist) {
-		if(desiredValuePersist==1){
-			this.desiredValue=true;
-		}else{
-			this.desiredValue=false;
+		if (desiredValuePersist == 1) {
+			this.desiredValue = true;
+		} else {
+			this.desiredValue = false;
 		}
-		
+
 	}
 
 	@Override
 	@Transient
 	public Double getLastValuePersist() {
-		if(this.lastValue){
+		if (this.lastValue) {
 			return (double) 1.0;
-		}else{
+		} else {
 			return (double) 0.0;
 		}
 	}
 
 	@Override
 	public void setLastValuePersist(Double lastValuePersist) {
-		if(lastValuePersist==1.0){
-			this.lastValue=true;
-		}else{
-			this.lastValue=false;
+		if (lastValuePersist == 1.0) {
+			this.lastValue = true;
+		} else {
+			this.lastValue = false;
 		}
-		
+
 	}
 
 }
-

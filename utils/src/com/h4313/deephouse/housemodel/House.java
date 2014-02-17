@@ -16,7 +16,6 @@ import com.h4313.deephouse.actuator.ActuatorType;
 import com.h4313.deephouse.dao.HouseDAO;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
-import com.h4313.deephouse.exceptions.DeepHouseNotFoundException;
 import com.h4313.deephouse.frame.Frame;
 import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.SensorType;
@@ -74,8 +73,12 @@ public class House implements Serializable {
 	public final static void initInstance(HouseDAO houseDao)
 			throws DeepHouseException {
 		House.instance = houseDao.find(0);
-		System.out.println("Cannot find House 0 in Db");
-		houseDao.createUpdate(House.getInstance());
+		if (House.instance == null) {
+			System.out.println("Cannot find House 0 in Db. Create a house with empty rooms");
+			houseDao.createUpdate(House.getInstance());
+		}else{
+			System.out.println("House 0 found in db");
+		}
 	}
 
 	/************** Getters and Setters ****************/
@@ -113,7 +116,7 @@ public class House implements Serializable {
 		if (sensorType instanceof SensorType) {
 			Room r = rooms.get(roomId);
 			r.addSensor(idSensor, (SensorType) sensorType);
-			r.establishConnections(); //seulement si 1actuator par type
+			r.establishConnections(); // seulement si 1actuator par type
 		} else {
 			throw new DeepHouseFormatException(
 					"MalFormed JSON : unknown room or sensor type");
@@ -132,7 +135,7 @@ public class House implements Serializable {
 		if (actuatorType instanceof ActuatorType) {
 			Room r = rooms.get(roomId);
 			r.addActuator(idActuator, (ActuatorType) actuatorType);
-			r.establishConnections(); //seulement si 1actuator par type
+			r.establishConnections(); // seulement si 1actuator par type
 		} else {
 			throw new DeepHouseFormatException(
 					"MalFormed JSON : unknown room or actuator type");

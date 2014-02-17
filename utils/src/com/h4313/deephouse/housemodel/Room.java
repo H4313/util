@@ -158,7 +158,7 @@ public abstract class Room implements Serializable {
 	}
 
 	private void connectSensorActuator(Sensor<Object> s, Actuator<Object> act) {
-		if (!act.getSensors().containsValue(s)) {
+		if (!act.getSensors().containsKey(s.getId())) {
 			act.getSensors().put(s.getId(), s);
 		}
 	}
@@ -186,7 +186,7 @@ public abstract class Room implements Serializable {
 			for(Actuator<Object> act : actuators.values()){
 				System.out.println(act.toString());
 				for(Sensor<Object> s : act.getSensors().values()){
-					System.out.println(s.toString());
+					System.out.println("     " + s.toString());
 				}
 			}
 		}
