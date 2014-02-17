@@ -48,9 +48,9 @@ public class DeepHouseCalendar
     	calendar.set(Calendar.MILLISECOND, passedTime);
     	
     	// Affichage de la date
-    	SimpleDateFormat formatter = new SimpleDateFormat();
-    	String currentDate = formatter.format(calendar.getTime());
-    	System.out.println(currentDate);
+//    	SimpleDateFormat formatter = new SimpleDateFormat();
+//    	String currentDate = formatter.format(calendar.getTime());
+//    	System.out.println(currentDate);
     	
     	return calendar;
     }
