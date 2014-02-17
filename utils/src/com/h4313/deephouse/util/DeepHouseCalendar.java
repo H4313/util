@@ -1,5 +1,6 @@
 package com.h4313.deephouse.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -18,7 +19,7 @@ public class DeepHouseCalendar
     }
 
     /**
-     * Méthode permettant de renvoyer une instance de la classe Singleton
+     * Mï¿½thode permettant de renvoyer une instance de la classe Singleton
      * @return Retourne l'instance du singleton.
      */
     public final static DeepHouseCalendar getInstance() {
@@ -45,6 +46,11 @@ public class DeepHouseCalendar
     	
     	int passedTime = ((int)(System.currentTimeMillis() - startTime)) * Constant.TIME_FACTOR; 
     	calendar.set(Calendar.MILLISECOND, passedTime);
+    	
+    	// Affichage de la date
+    	SimpleDateFormat formatter = new SimpleDateFormat();
+    	String currentDate = formatter.format(calendar.getTime());
+    	System.out.println(currentDate);
     	
     	return calendar;
     }
