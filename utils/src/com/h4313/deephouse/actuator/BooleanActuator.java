@@ -1,5 +1,6 @@
 package com.h4313.deephouse.actuator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
@@ -126,6 +127,24 @@ public class BooleanActuator extends Actuator<Boolean> {
 			this.lastValue = false;
 		}
 
+	}
+
+	@Column
+	public String getTrueText() {
+		return trueText;
+	}
+
+	public void setTrueText(String trueText) {
+		this.trueText = trueText;
+	}
+
+	@Column
+	public String getFalseText() {
+		return falseText;
+	}
+
+	public void setFalseText(String falseText) {
+		this.falseText = falseText;
 	}
 
 }
