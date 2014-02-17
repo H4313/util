@@ -68,7 +68,7 @@ public class TcpSender extends Thread
 				
 				if(s != null && !s.isEmpty())
 				{
-//					System.out.println("Message envoye : " + s);
+					System.out.println("Message envoye : " + s);
 					canSend = send(s);
 				}
 				
