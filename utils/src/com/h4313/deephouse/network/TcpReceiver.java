@@ -57,7 +57,7 @@ public class TcpReceiver extends Thread
 				message = this.receive();
 				if(message != null && !message.isEmpty())
 				{
-					System.out.println("Message recu : " + message);
+//					System.out.println("Message recu : " + message);
 					this.applicant.callBack(message);
 				}
 			}
