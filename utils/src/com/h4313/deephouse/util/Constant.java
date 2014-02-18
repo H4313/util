@@ -54,5 +54,7 @@ public abstract class Constant
      * Application Android
      */
     public static final long MILLISECONDS_TILL_REFRESH = 10000; // 10 secondes
+    public static final long MILLISECONDS_TILL_UNMUTING_TEMPERATURE_BUTTONS = 60*30*1000; 
+
  
 }
