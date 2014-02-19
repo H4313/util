@@ -9,8 +9,8 @@ public class ActuatorAdapter implements JsonSerializer<Actuator<Object>>, JsonDe
     @Override
     public JsonElement serialize(Actuator<Object> src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
-        result.add("properties", context.serialize(src, src.getClass()));
+        result.add("objecttypeactuator", new JsonPrimitive(src.getClass().getSimpleName()));
+        result.add("propertiesactuator", context.serialize(src, src.getClass()));
 
         return result;
     }
@@ -19,8 +19,8 @@ public class ActuatorAdapter implements JsonSerializer<Actuator<Object>>, JsonDe
     public Actuator<Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
         throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        String type = jsonObject.get("type").getAsString();
-        JsonElement element = jsonObject.get("properties");
+        String type = jsonObject.get("objecttypeactuator").getAsString();
+        JsonElement element = jsonObject.get("propertiesactuator");
 
         try {
             return context.deserialize(element, Class.forName("com.h4313.deephouse.actuator." + type));
