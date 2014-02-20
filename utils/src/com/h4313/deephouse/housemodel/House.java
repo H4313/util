@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.actuator.ActuatorType;
 import com.h4313.deephouse.dao.HouseDAO;
+import com.h4313.deephouse.exceptions.DeepHouseDuplicateException;
 import com.h4313.deephouse.exceptions.DeepHouseException;
 import com.h4313.deephouse.exceptions.DeepHouseFormatException;
 import com.h4313.deephouse.frame.Frame;
@@ -113,6 +114,15 @@ public class House implements Serializable {
 			throws DeepHouseException {
 		SensorType sensorType = SensorType.valueOf(type);
 
+		for(Room room : House.getInstance().getRooms())
+		{
+			if(room.getSensors().containsKey(idSensor)
+				|| room.getActuators().containsKey(idSensor))
+			{
+				throw new DeepHouseDuplicateException("Id already exists");
+			}
+		}
+		
 		if (sensorType instanceof SensorType) {
 			Room r = rooms.get(roomId);
 			r.addSensor(idSensor, (SensorType) sensorType);
@@ -132,10 +142,19 @@ public class House implements Serializable {
 			throws DeepHouseException {
 		ActuatorType actuatorType = ActuatorType.valueOf(type);
 
+		for(Room room : House.getInstance().getRooms())
+		{
+			if(room.getSensors().containsKey(idActuator)
+				|| room.getActuators().containsKey(idActuator))
+			{
+				throw new DeepHouseDuplicateException("Id already exists");
+			}
+		}
+		
 		if (actuatorType instanceof ActuatorType) {
 			Room r = rooms.get(roomId);
 			r.addActuator(idActuator, (ActuatorType) actuatorType);
-			r.establishConnections(); // seulement si 1actuator par type
+			r.establishConnections(); // seulement si 1 actuator par type
 		} else {
 			throw new DeepHouseFormatException(
 					"MalFormed JSON : unknown room or actuator type");
