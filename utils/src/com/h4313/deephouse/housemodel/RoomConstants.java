@@ -15,5 +15,5 @@ public abstract class RoomConstants {
 	public static final String lightAction = "LIGHT";
 	public static final String windAction = "WINDOW";
 	public static final String doorAction = "DOOR";
-	public static final String flapAction = "FLAP"; //Volet
+	public static final String flapAction = "FLAP";
 }
