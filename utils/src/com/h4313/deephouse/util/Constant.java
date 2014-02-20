@@ -56,6 +56,7 @@ public abstract class Constant
 //    public static final long MILLISECONDS_TILL_REFRESH = 10000; // 10 secondes // PAUL OUT : 2014.02.19
     public static final long MILLISECONDS_TILL_REFRESH = 5000; // 5 seconds
     public static final long MILLISECONDS_TILL_UNMUTING_TEMPERATURE_BUTTONS = 60*30*1000; 
-
- 
+    public static final int SENSOR_ID_LENGTH = 8;
+    public static final double RELATIVE_TEMPERATURE_INCREASE_ON_USER_RQST = 2;
+    public static final double RELATIVE_TEMPERATURE_DECREASE_ON_USER_RQST = -2;
 }
