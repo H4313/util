@@ -93,6 +93,8 @@ public abstract class Room implements Serializable {
 			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
 		} else if (RoomConstants.windAction.equals(action)) {
 			list = getActuatorById(actuatorId);
+		} else if (RoomConstants.doorAction.equals(action)) {
+			list = getActuatorById(actuatorId);
 		} else if (RoomConstants.flapAction.equals(action)) {
 			list = getActuatorById(actuatorId);
 		} else {
