@@ -167,15 +167,14 @@ public class House implements Serializable {
 	 * "piece" : idPiece "typeAction" : string (see RoomConstants "valeur" :
 	 * valeurCapteur= string
 	 * */
-	public void userAction(Integer roomId, String typeAction, String value,
-			String actuatorId) throws DeepHouseException {
+	public void userAction(Integer roomId, String typeAction, String value) throws DeepHouseException {
 		try {
 			if (roomId < 0 || roomId >= RoomConstants.NB_PIECES) {
 				throw new DeepHouseFormatException("Unknown room id : "
 						+ roomId);
 			}
 			Room r = rooms.get(roomId);
-			r.userAction(typeAction, value, actuatorId);
+			r.userAction(typeAction, value);
 		} catch (Exception e) {
 			throw new DeepHouseFormatException("MalFormed JSON : "
 					+ e.getMessage());
