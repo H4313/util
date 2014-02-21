@@ -19,6 +19,8 @@ public class Radiator extends Actuator<Double> {
 	protected Double lastValue;
 	
 	protected Double desiredValue;
+	
+	protected Double userValue;
 
 	public Radiator()
 	{
@@ -78,6 +80,22 @@ public class Radiator extends Actuator<Double> {
 	public Double getDesiredValue() {
 		return this.desiredValue;
 	}
+	
+	@Override
+	public void setUserValue(Double value) throws DeepHouseException {
+		try {
+			userValue = value;
+			// TODO 
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("Format exception: " + value);
+		}
+	}
+	
+	@Override
+	@Transient
+	public Double getUserValue() {
+		return this.userValue;
+	}
 
 	@Override
 	protected String dataString() {
@@ -119,6 +137,18 @@ public class Radiator extends Actuator<Double> {
 	@Override
 	public void setDesiredValuePersist(Double desiredValuePersist) {
 		this.desiredValue=desiredValuePersist;
+		
+	}
+	
+	@Override
+	@Transient
+	public Double getUserValuePersist() {
+		return this.userValue;
+	}
+	
+	@Override
+	public void setUserValuePersist(Double userValuePersist) {
+		this.userValue=userValuePersist;
 		
 	}
 
