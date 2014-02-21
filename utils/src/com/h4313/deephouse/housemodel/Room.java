@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.actuator.ActuatorFactory;
@@ -241,6 +242,7 @@ public abstract class Room implements Serializable {
 	 * Retourne le nom de la piece courante
 	 * @return Nom de la piece
 	 */
+	@Transient
 	public String getName()
 	{
 		String str = "Inconnue";
