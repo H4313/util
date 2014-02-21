@@ -12,7 +12,7 @@ public class SensorFactory {
 			return new BooleanSensor(id, type, "OFF", "ON");
 
 		case PRESENCE:
-			return new BooleanSensor(id, type, "Nobody in the room", "Someone in the room");
+			return new BooleanSensor(id, type, "Aucune", "Yes sir");
 
 		case WINDOW:
 			return new BooleanSensor(id, type, "CLOSE", "OPEN");
