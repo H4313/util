@@ -236,6 +236,38 @@ public abstract class Room implements Serializable {
 		}
 		return list;
 	}
+	
+	/**
+	 * Retourne le nom de la piece courante
+	 * @return Nom de la piece
+	 */
+	public String getName()
+	{
+		String str = "Inconnue";
+		switch(this.getIdRoom())
+		{
+		case RoomConstants.ID_LIVING_ROOM:
+			str = "Salon";
+			break;
+		case RoomConstants.ID_KITCHEN:
+			str = "Cuisine";
+			break;
+		case RoomConstants.ID_BATHROOM:
+			str = "Salle de bain";
+			break;
+		case RoomConstants.ID_BEDROOM:
+			str = "Chambre";
+			break;
+		case RoomConstants.ID_OFFICE:
+			str = "Bureau";
+			break;
+		case RoomConstants.ID_CORRIDOR:
+			str = "Couloir";
+			break;
+		}
+
+		return str;
+	}
 
 	// PAUL OUT : 2014.02.20
 //	public ArrayList<Actuator<Object>> getActuatorById(String id) {
