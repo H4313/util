@@ -9,8 +9,8 @@ public class RoomAdapter implements JsonSerializer<Room>, JsonDeserializer<Room>
     @Override
     public JsonElement serialize(Room src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
-        result.add("properties", context.serialize(src, src.getClass()));
+        result.add("objecttyperoom", new JsonPrimitive(src.getClass().getSimpleName()));
+        result.add("propertiesroom", context.serialize(src, src.getClass()));
 
         return result;
     }
@@ -19,8 +19,8 @@ public class RoomAdapter implements JsonSerializer<Room>, JsonDeserializer<Room>
     public Room deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
         throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        String type = jsonObject.get("type").getAsString();
-        JsonElement element = jsonObject.get("properties");
+        String type = jsonObject.get("objecttyperoom").getAsString();
+        JsonElement element = jsonObject.get("propertiesroom");
 
         try {
             return context.deserialize(element, Class.forName("com.h4313.deephouse.housemodel." + type));

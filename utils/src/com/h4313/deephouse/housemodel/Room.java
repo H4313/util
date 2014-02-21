@@ -83,7 +83,7 @@ public abstract class Room implements Serializable {
 
 	/************** Methods (if there are no params, cannot start with get) ****************/
 	@SuppressWarnings("unchecked")
-	public void userAction(String action, String value, String actuatorId)
+	public void userAction(String action, String value)
 			throws DeepHouseException {
 
 		ArrayList<Actuator<Object>> list;
@@ -92,16 +92,24 @@ public abstract class Room implements Serializable {
 		} else if (RoomConstants.lightAction.equals(action)) {
 			list = getActuatorByType(ActuatorType.LIGHTCONTROL);
 		} else if (RoomConstants.windAction.equals(action)) {
-			list = getActuatorById(actuatorId);
+			list = getActuatorByType(ActuatorType.WINDOWCLOSER);
+		} else if (RoomConstants.doorAction.equals(action)) {
+			list = getActuatorByType(ActuatorType.DOORCONTROL);
 		} else if (RoomConstants.flapAction.equals(action)) {
-			list = getActuatorById(actuatorId);
+			list = getActuatorByType(ActuatorType.FLAPCLOSER);
 		} else {
 			throw new DeepHouseFormatException("Unknown action type : "
 					+ action);
 		}
 
 		for (Actuator<Object> act : list) {
-			act.setDesiredValue(value);
+			if (RoomConstants.tempAction.equals(action)) {
+				act.setDesiredValue(Double.valueOf(value));
+			}
+			else
+			{
+				act.setDesiredValue(Boolean.valueOf(value));
+			}
 		}
 	}
 
@@ -229,15 +237,16 @@ public abstract class Room implements Serializable {
 		return list;
 	}
 
-	public ArrayList<Actuator<Object>> getActuatorById(String id) {
-		ArrayList<Actuator<Object>> list = new ArrayList<Actuator<Object>>();
-		Set<Map.Entry<String, Actuator<Object>>> set = actuators.entrySet();
-		for (Map.Entry<String, Actuator<Object>> entry : set) {
-			if (entry.getValue().getType().equals(id)) {
-				list.add(entry.getValue());
-			}
-		}
-		return list;
-	}
+	// PAUL OUT : 2014.02.20
+//	public ArrayList<Actuator<Object>> getActuatorById(String id) {
+//		ArrayList<Actuator<Object>> list = new ArrayList<Actuator<Object>>();
+//		Set<Map.Entry<String, Actuator<Object>>> set = actuators.entrySet();
+//		for (Map.Entry<String, Actuator<Object>> entry : set) {
+//			if (entry.getValue().getType().equals(id)) {
+//				list.add(entry.getValue());
+//			}
+//		}
+//		return list;
+//	}
 
 }

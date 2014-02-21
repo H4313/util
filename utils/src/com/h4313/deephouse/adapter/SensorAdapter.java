@@ -9,8 +9,8 @@ public class SensorAdapter implements JsonSerializer<Sensor<Object>>, JsonDeseri
     @Override
     public JsonElement serialize(Sensor<Object> src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
-        result.add("properties", context.serialize(src, src.getClass()));
+        result.add("objecttypesensor", new JsonPrimitive(src.getClass().getSimpleName()));
+        result.add("propertiessensor", context.serialize(src, src.getClass()));
 
         return result;
     }
@@ -19,8 +19,8 @@ public class SensorAdapter implements JsonSerializer<Sensor<Object>>, JsonDeseri
     public Sensor<Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
         throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        String type = jsonObject.get("type").getAsString();
-        JsonElement element = jsonObject.get("properties");
+        String type = jsonObject.get("objecttypesensor").getAsString();
+        JsonElement element = jsonObject.get("propertiessensor");
 
         try {
             return context.deserialize(element, Class.forName("com.h4313.deephouse.sensor." + type));
