@@ -61,6 +61,16 @@ public abstract class Actuator<T> implements Serializable {
 
 	@Transient
 	public abstract T getDesiredValue();
+	
+	public abstract void setUserValue(T value) throws DeepHouseException;
+	
+	@Transient
+	public abstract T getUserValue();
+	
+	@Column
+	public abstract Double getUserValuePersist();
+	
+	public abstract void setUserValuePersist(Double desiredValuePersist);
 
 	@Column
 	public abstract Double getDesiredValuePersist();

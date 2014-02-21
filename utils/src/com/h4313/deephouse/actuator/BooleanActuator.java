@@ -17,6 +17,8 @@ public class BooleanActuator extends Actuator<Boolean> {
 	protected boolean lastValue;
 
 	protected boolean desiredValue;
+	
+	protected boolean userValue;
 
 	protected String trueText;
 
@@ -69,6 +71,23 @@ public class BooleanActuator extends Actuator<Boolean> {
 	public Boolean getDesiredValue() {
 		return this.desiredValue;
 	}
+	
+	@Override
+	public void setUserValue(Boolean value) throws DeepHouseException {
+		try {
+			userValue = value;
+
+			// TODO
+		} catch (Exception e) {
+			throw new DeepHouseFormatException("Format exception: " + value);
+		}
+	}
+
+	@Override
+	@Transient
+	public Boolean getUserValue() {
+		return this.userValue;
+	}
 
 	@Transient
 	public Boolean getLastValue() {
@@ -78,6 +97,8 @@ public class BooleanActuator extends Actuator<Boolean> {
 	public void setLastValue(Boolean value) {
 		this.lastValue = value;
 	}
+	
+	
 
 	@Override
 	protected String dataString() {
@@ -105,6 +126,27 @@ public class BooleanActuator extends Actuator<Boolean> {
 			this.desiredValue = true;
 		} else {
 			this.desiredValue = false;
+		}
+
+	}
+	
+	@Override
+	@Transient
+	public Double getUserValuePersist() {
+
+		if (this.userValue) {
+			return (double) 1;
+		} else {
+			return (double) 0;
+		}
+	}
+
+	@Override
+	public void setUserValuePersist(Double userValuePersist) {
+		if (userValuePersist == 1) {
+			this.userValue = true;
+		} else {
+			this.userValue = false;
 		}
 
 	}

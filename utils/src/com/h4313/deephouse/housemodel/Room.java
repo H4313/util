@@ -104,11 +104,11 @@ public abstract class Room implements Serializable {
 
 		for (Actuator<Object> act : list) {
 			if (RoomConstants.tempAction.equals(action)) {
-				act.setDesiredValue(Double.valueOf(value));
+				act.setUserValue(Double.valueOf(value));
 			}
 			else
 			{
-				act.setDesiredValue(Boolean.valueOf(value));
+				act.setUserValue(Boolean.valueOf(value));
 			}
 		}
 	}
