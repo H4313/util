@@ -73,12 +73,19 @@ public class House implements Serializable {
 
 	public final static void initInstance(HouseDAO houseDao)
 			throws DeepHouseException {
-		House.instance = houseDao.find(0);
-		if (House.instance == null) {
-			System.out.println("Cannot find House 0 in Db. Create a house with empty rooms");
-			houseDao.createUpdate(House.getInstance());
-		}else{
-			System.out.println("House 0 found in db");
+		try
+		{
+			House.instance = houseDao.find(0);
+			if (House.instance == null) {
+				System.out.println("Cannot find House 0 in Db. Create a house with empty rooms");
+				houseDao.createUpdate(House.getInstance());
+			}else{
+				System.out.println("House 0 found in db");
+			}
+		} 
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 		}
 	}
 
