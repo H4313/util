@@ -21,7 +21,7 @@ import com.h4313.deephouse.sensor.TemperatureSensor;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
-	
+
 	static {
 		try {
 			sessionFactory = new AnnotationConfiguration()
@@ -48,7 +48,12 @@ public class HibernateUtil {
 	}
 
 	public static Session getSession() throws HibernateException {
-		return sessionFactory.openSession();
-	}
+		Session sess = null;       
+		try {         
+			sess = sessionFactory.getCurrentSession();  
+		} catch (org.hibernate.HibernateException he) {  
+			sess = sessionFactory.openSession();     
+		}             
+		return sess;	}
 
 }
