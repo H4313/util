@@ -20,8 +20,9 @@ import com.h4313.deephouse.sensor.BooleanSensor;
 import com.h4313.deephouse.sensor.TemperatureSensor;
 
 public class HibernateUtil {
+	private static volatile Session session;
 	private static final SessionFactory sessionFactory;
-
+	
 	static {
 		try {
 			sessionFactory = new AnnotationConfiguration()
@@ -48,12 +49,12 @@ public class HibernateUtil {
 	}
 
 	public static Session getSession() throws HibernateException {
-		Session sess = null;       
+//		Session sess = null;       
 		try {         
-			sess = sessionFactory.getCurrentSession();  
+			session = sessionFactory.getCurrentSession();  
 		} catch (org.hibernate.HibernateException he) {  
-			sess = sessionFactory.openSession();     
+			session = sessionFactory.openSession();     
 		}             
-		return sess;	}
-
+		return session;	
+	}
 }

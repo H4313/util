@@ -7,18 +7,17 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.h4313.deephouse.exceptions.DeepHouseTypeException;
-import com.h4313.deephouse.util.HibernateUtil;
 
 public abstract class DAO<T> {
 	
 
 		/**
-		 * Session de connection à la BD
+		 * Session de connection ï¿½ la BD
 		 */
-		public Session session = HibernateUtil.getSession();
+//		public static volatile Session session = null;
 		
 		/**
-		 * Permet de récupérer un objet via son ID
+		 * Permet de rï¿½cupï¿½rer un objet via son ID
 		 * @param id
 		 * @return
 		 * @throws DeepHouseTypeException 
@@ -26,15 +25,15 @@ public abstract class DAO<T> {
 		public abstract T find(Object id) throws DeepHouseTypeException;
 		
 		/**
-		 * Permet de récupèrer l'ensemble des objets de type T
+		 * Permet de rï¿½cupï¿½rer l'ensemble des objets de type T
 		 * @param obj
 		 */
 		public abstract List<T> findAll();
 
 		
 		/**
-		 * Permet de créer une entrée dans la base de données
-		 * par rapport à un objet
+		 * Permet de crï¿½er une entrï¿½e dans la base de donnï¿½es
+		 * par rapport ï¿½ un objet
 		 * @param obj
 		 */
 		public abstract T createUpdate(T obj) ;
@@ -43,7 +42,7 @@ public abstract class DAO<T> {
 
 		
 		/**
-		 * Permet la suppression d'une entrée de la base
+		 * Permet la suppression d'une entrï¿½e de la base
 		 * @param obj
 		 */
 		public abstract void delete(T obj);
