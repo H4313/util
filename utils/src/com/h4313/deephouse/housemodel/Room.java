@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
@@ -36,8 +37,11 @@ public abstract class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected int idRoom;
-
+	
+	@OneToMany(fetch = FetchType.EAGER)
 	protected Map<String, Sensor<Object>> sensors;
+	
+	@OneToMany(fetch = FetchType.EAGER)
 	protected Map<String, Actuator<Object>> actuators;
 
 	public Room(int id) {
@@ -62,7 +66,7 @@ public abstract class Room implements Serializable {
 		this.idRoom = idRoom;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@MapKey(name = "id")
 	public Map<String, Actuator<Object>> getActuators() {
 		return actuators;
@@ -72,7 +76,7 @@ public abstract class Room implements Serializable {
 		this.actuators = actuators;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@MapKey(name = "id")
 	public Map<String, Sensor<Object>> getSensors() {
 		return sensors;

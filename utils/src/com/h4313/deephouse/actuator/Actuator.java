@@ -7,8 +7,10 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.h4313.deephouse.exceptions.DeepHouseDuplicateException;
@@ -23,6 +25,7 @@ public abstract class Actuator<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected ActuatorType type;
+	@ManyToMany(fetch = FetchType.EAGER)
 	protected Map<String, Sensor<Object>> sensors;
 	protected boolean modified;
 
@@ -139,7 +142,7 @@ public abstract class Actuator<T> implements Serializable {
 		this.type = type;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Map<String, Sensor<Object>> getSensors() {
 		return sensors;
 	}

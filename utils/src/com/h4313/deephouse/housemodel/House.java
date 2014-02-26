@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -31,6 +32,7 @@ public class House implements Serializable {
 
 	private static volatile House instance = null;
 
+	@OneToMany(fetch = FetchType.EAGER)
 	protected List<Room> rooms;
 
 	protected int idHouse;
@@ -101,7 +103,7 @@ public class House implements Serializable {
 		this.idHouse = idHouse;
 	}
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	public List<Room> getRooms() {
 		return rooms;
 	}
