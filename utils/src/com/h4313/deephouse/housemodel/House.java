@@ -78,7 +78,7 @@ public class House implements Serializable {
 		try
 		{
 			System.out.println("Nb pieces avant persistance = " + House.getInstance().getRooms().size());
-			House.instance = houseDao.find(0);
+			House.instance = houseDao.find(Integer.valueOf(0));
 			if (House.instance == null) {
 				System.out.println("Cannot find House 0 in Db. Create a house with empty rooms");
 				houseDao.createUpdate(House.getInstance());

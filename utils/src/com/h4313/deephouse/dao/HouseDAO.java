@@ -29,9 +29,26 @@ public class HouseDAO extends DAO<House> {
 					+ ",   Object is not good type, except : Integer");
 		}
 		
-		Session session = HibernateUtil.getSession();
-		House house = (House) session.get(House.class, (Integer) id);
-		session.close();
+		House house = null;
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+//			house = (House) session.get(House.class, (Integer) id);
+			List<House> houseList = session.createQuery("FROM " + House.class.getName()).list();
+//			List<Room> roomList = session.createQuery("FROM " + Room.class.getName()).list();
+//			System.out.println(houseList);
+//			System.out.println(roomList);
+			house = houseList.get(0);
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			if(transaction != null) transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			 if(session != null) session.close();
+		}
 		
 		return house;
 	}
@@ -93,5 +110,4 @@ public class HouseDAO extends DAO<House> {
 			}
 		}
 	}
-
 }

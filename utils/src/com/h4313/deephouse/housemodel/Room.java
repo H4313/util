@@ -38,10 +38,10 @@ public abstract class Room implements Serializable {
 
 	protected int idRoom;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+//	@OneToMany(fetch = FetchType.EAGER)
 	protected Map<String, Sensor<Object>> sensors;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+//	@OneToMany(fetch = FetchType.EAGER)
 	protected Map<String, Actuator<Object>> actuators;
 
 	public Room(int id) {

@@ -36,7 +36,7 @@ public abstract class Sensor<T> implements Serializable {
 	@Transient
 	public abstract T getLastValue();
 
-	@Transient
+	@Column
 	public abstract Double getLastValuePersist();
 
 	public abstract void setLastValuePersist(Double lastValuePersist);

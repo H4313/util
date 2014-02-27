@@ -61,7 +61,7 @@ public class BooleanSensor extends Sensor<Boolean> implements Serializable{
 		}
 	}
 	
-	@Transient
+	@Transient 
 	public Boolean getLastValue() {
 		return lastValue;
 	}

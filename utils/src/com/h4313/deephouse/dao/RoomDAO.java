@@ -34,10 +34,6 @@ public class RoomDAO extends DAO<Room> {
 		
 		return room;
 	}
-	
-	
-
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -86,13 +82,5 @@ public class RoomDAO extends DAO<Room> {
 		} finally {
 			if(session != null) session.close();
 		}
-	
 	}
-
-
-
-
-
-	
-
 }

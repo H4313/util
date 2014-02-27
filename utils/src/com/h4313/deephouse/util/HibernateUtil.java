@@ -29,11 +29,11 @@ public class HibernateUtil {
 		try {
 			sessionFactory = new AnnotationConfiguration()
 			.addPackage("com.h4313.deephouse.sensor") // le nom complet du package
-			.addAnnotatedClass(Sensor.class)
+//			.addAnnotatedClass(Sensor.class)
 			.addAnnotatedClass(BooleanSensor.class)
 			.addAnnotatedClass(TemperatureSensor.class)
 			.addPackage("com.h4313.deephouse.actuator") // le nom complet du package
-			.addAnnotatedClass(Actuator.class)
+//			.addAnnotatedClass(Actuator.class)
 			.addAnnotatedClass(Radiator.class)
 			.addAnnotatedClass(BooleanActuator.class)
 			.addPackage("com.h4313.deephouse.housemodel") // le nom complet du package

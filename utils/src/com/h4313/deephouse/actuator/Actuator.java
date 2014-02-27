@@ -85,8 +85,7 @@ public abstract class Actuator<T> implements Serializable {
 
 	public abstract void setLastValue(T o);
 
-//	@Column
-	@Transient
+	@Column
 	public abstract Double getLastValuePersist();
 
 	public abstract void setLastValuePersist(Double lastValuePersist);
