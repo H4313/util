@@ -32,7 +32,7 @@ public class House implements Serializable {
 
 	private static volatile House instance = null;
 
-	@OneToMany(fetch = FetchType.EAGER)
+//	@OneToMany(fetch = FetchType.EAGER)
 	protected List<Room> rooms;
 
 	protected int idHouse;
@@ -77,6 +77,7 @@ public class House implements Serializable {
 			throws DeepHouseException {
 		try
 		{
+			System.out.println("Nb pieces avant persistance = " + House.getInstance().getRooms().size());
 			House.instance = houseDao.find(0);
 			if (House.instance == null) {
 				System.out.println("Cannot find House 0 in Db. Create a house with empty rooms");
@@ -84,6 +85,7 @@ public class House implements Serializable {
 			}else{
 				System.out.println("House 0 found in db");
 			}
+			System.out.println("Nb pieces apres persistance = " + House.getInstance().getRooms().size());
 		} 
 		catch(Exception e)
 		{

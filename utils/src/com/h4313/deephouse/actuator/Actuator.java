@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
@@ -24,7 +25,7 @@ public abstract class Actuator<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected ActuatorType type;
-	@ManyToMany(fetch = FetchType.EAGER)
+//	@ManyToMany(fetch = FetchType.EAGER)
 	protected Map<String, Sensor<Object>> sensors;
 	protected boolean modified;
 
@@ -84,7 +85,8 @@ public abstract class Actuator<T> implements Serializable {
 
 	public abstract void setLastValue(T o);
 
-	@Column
+//	@Column
+	@Transient
 	public abstract Double getLastValuePersist();
 
 	public abstract void setLastValuePersist(Double lastValuePersist);
@@ -122,8 +124,8 @@ public abstract class Actuator<T> implements Serializable {
 		this.modified = modified;
 	}
 
-	@Column
 	@Id
+	@Column(name = "idActuator", nullable = false)
 	public String getId() {
 		return id;
 	}
@@ -142,6 +144,7 @@ public abstract class Actuator<T> implements Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@MapKey(name = "id")
 	public Map<String, Sensor<Object>> getSensors() {
 		return sensors;
 	}

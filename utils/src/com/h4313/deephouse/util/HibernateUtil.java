@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+import com.h4313.deephouse.actuator.Actuator;
 import com.h4313.deephouse.actuator.BooleanActuator;
 import com.h4313.deephouse.actuator.Radiator;
 import com.h4313.deephouse.housemodel.Bathroom;
@@ -17,19 +18,22 @@ import com.h4313.deephouse.housemodel.LivingRoom;
 import com.h4313.deephouse.housemodel.Office;
 import com.h4313.deephouse.housemodel.Room;
 import com.h4313.deephouse.sensor.BooleanSensor;
+import com.h4313.deephouse.sensor.Sensor;
 import com.h4313.deephouse.sensor.TemperatureSensor;
 
 public class HibernateUtil {
-	private static volatile Session session;
+//	private static volatile Session session;
 	private static final SessionFactory sessionFactory;
 	
 	static {
 		try {
 			sessionFactory = new AnnotationConfiguration()
 			.addPackage("com.h4313.deephouse.sensor") // le nom complet du package
+			.addAnnotatedClass(Sensor.class)
 			.addAnnotatedClass(BooleanSensor.class)
 			.addAnnotatedClass(TemperatureSensor.class)
 			.addPackage("com.h4313.deephouse.actuator") // le nom complet du package
+			.addAnnotatedClass(Actuator.class)
 			.addAnnotatedClass(Radiator.class)
 			.addAnnotatedClass(BooleanActuator.class)
 			.addPackage("com.h4313.deephouse.housemodel") // le nom complet du package
@@ -49,7 +53,7 @@ public class HibernateUtil {
 	}
 
 	public static Session getSession() throws HibernateException {
-//		Session sess = null;       
+		Session session = null;       
 		try {         
 			session = sessionFactory.getCurrentSession();  
 		} catch (org.hibernate.HibernateException he) {  
