@@ -34,12 +34,14 @@ public abstract class Constant
      */
     public static final int DEFAULT_YEAR = 2014;
     public static final int DEFAULT_MONTH = 0;
-    public static final int DEFAULT_DAY = 1;
+//    public static final int DEFAULT_DAY = 1;
+    public static final int DEFAULT_DAY = 3; // Vendredi 3 Janvier 2014
     public static final int DEFAULT_HOUR = 0;
     public static final int DEFAULT_MINUTE = 0;
     public static final int DEFAULT_SECOND = 0;
-//    public static final int TIME_FACTOR = 1440; // current time = real time * X
-    public static final int TIME_FACTOR = 500; // current time = real time * X
+//    public static final int TIME_FACTOR = 1440; // current time = real time * 1440
+    public static final int TIME_FACTOR = 500; // current time = real time * 500
+//    public static final int TIME_FACTOR = 120; // current time = real time * 120
 
     /**
      * URL
