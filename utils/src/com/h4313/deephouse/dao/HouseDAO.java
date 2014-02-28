@@ -40,7 +40,7 @@ public class HouseDAO extends DAO<House> {
 //			List<Room> roomList = session.createQuery("FROM " + Room.class.getName()).list();
 //			System.out.println(houseList);
 //			System.out.println(roomList);
-			house = houseList.get(0);
+			house = houseList.get(((Integer) id).intValue());
 			
 			transaction.commit();
 		} catch (HibernateException e) {
